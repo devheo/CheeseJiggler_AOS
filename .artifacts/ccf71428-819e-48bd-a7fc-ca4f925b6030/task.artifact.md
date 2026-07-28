@@ -1,5 +1,0 @@
-- [x] strings.xml에 단계별 가이드 문구 추가
-- [x] item_welcome_page.xml 레이아웃 파일 생성
-- [x] activity_welcome.xml을 ViewPager2 구조로 변경
-- [x] WelcomeActivity.kt에 ViewPager2 어댑터 및 로직 구현
-- [x] 빌드 및 정상 동작 확인
