@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.nicsy.cheese.jiggler.layout.AppPreferences
@@ -62,12 +63,19 @@ class SettingsActivity : ComponentActivity() {
     private lateinit var btnSave: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
         prefs = AppPreferences(this)
 
         settingsRootLayout = findViewById(R.id.settingsRootLayout)
+        ViewCompat.setOnApplyWindowInsetsListener(settingsRootLayout) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
         btnBack = findViewById(R.id.btnBack)
 
         // Status Bar 처리

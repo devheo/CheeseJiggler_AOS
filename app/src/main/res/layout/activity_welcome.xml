@@ -4,7 +4,7 @@
     android:id="@+id/welcomeRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cheese_bg_light">
+    android:background="@color/app_background">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

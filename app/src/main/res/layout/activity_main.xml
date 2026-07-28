@@ -4,8 +4,7 @@
     android:id="@+id/mainRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/cheese_bg_dark">
+    android:background="@color/app_background">
 
     <!-- 바둑판 지글러 화면 -->
     <com.nicsy.cheese.jiggler.layout.JigglerGridLayout
@@ -25,7 +24,7 @@
         android:contentDescription="@string/main_settings_desc"
         android:src="@drawable/ico_app_settings"
         android:scaleType="fitCenter"
-        android:padding="12dp"
+        android:padding="6dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         app:tint="@color/cheese_primary" />
 
@@ -59,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main_stealth_label"
-            android:textColor="@color/cheese_text_on_dark"
+            android:textColor="@color/app_on_surface"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -69,21 +68,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             app:thumbTint="@color/cheese_primary"
-            app:trackTint="@color/gray_800" />
+            app:trackTint="@color/cheese_accent" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabPlay"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="40dp"
         android:contentDescription="@string/main_play_desc"
         android:src="@drawable/ico_app_play"
-        app:maxImageSize="48dp"
-        app:fabCustomSize="88dp"
-        app:tint="@color/cheese_text_on_primary"
-        app:backgroundTint="@color/cheese_primary"
-        app:elevation="8dp" />
+        app:maxImageSize="72dp"
+        android:scaleType="centerCrop"
+        app:fabCustomSize="80dp"
+        app:tint="@null"
+        app:backgroundTint="@color/cheese_primary" />
 </RelativeLayout>

@@ -13,7 +13,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.nicsy.cheese.jiggler.R
@@ -47,6 +49,7 @@ class MainActivity : ComponentActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -112,14 +115,12 @@ class MainActivity : ComponentActivity() {
                 } else {
                     lastBackPressedTime = System.currentTimeMillis()
                     val snackbar = Snackbar.make(mainRootLayout, getString(R.string.exit_double_tap), Snackbar.LENGTH_SHORT)
-                    snackbar.setBackgroundTint(Color.parseColor("#FFBB00")) // 치즈색 노란색
-                    snackbar.setTextColor(Color.BLACK)
-                    // 텍스트 중앙 정렬 추가
+                    snackbar.setBackgroundTint(ContextCompat.getColor(this@MainActivity, R.color.cheese_primary))
+                    snackbar.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.white))
+                    
                     val textView = snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
                     textView.textAlignment = View.TEXT_ALIGNMENT_CENTER
-
                     snackbar.show()
-
                 }
             }
         }

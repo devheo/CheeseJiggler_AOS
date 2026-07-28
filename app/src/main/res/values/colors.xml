@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Core Cheese Palette -->
-    <color name="cheese_primary">#FFB300</color>    <!-- Amber 600 -->
-    <color name="cheese_primary_variant">#FFA000</color>
-    <color name="cheese_secondary">#FFECB3</color>  <!-- Amber 100 -->
-    <color name="cheese_accent">#FFD54F</color>     <!-- Amber 300 -->
-
-    <!-- Backgrounds & Surfaces -->
-    <color name="cheese_bg_light">#FFFDE7</color>   <!-- Yellow 50 (Creamy) -->
-    <color name="cheese_bg_dark">#1A1A1A</color>    <!-- Soft Dark Gray -->
-    <color name="cheese_surface_dark">#2D2D2D</color> <!-- Card/Surface Gray -->
-
-    <!-- Text Colors -->
-    <color name="cheese_text_primary">#212121</color>
-    <color name="cheese_text_secondary">#757575</color>
-    <color name="cheese_text_on_dark">#E0E0E0</color>
+    <!-- Brand Colors (Static) -->
+    <color name="cheese_primary">#FBC02D</color>
+    <color name="cheese_primary_variant">#F9A825</color>
+    <color name="cheese_secondary">#FFF176</color>
+    <color name="cheese_accent">#FDD835</color>
     <color name="cheese_text_on_primary">#000000</color>
 
-    <!-- Semantic / Legacy -->
+    <!-- Semantic Colors (Adaptive) -->
+    <color name="app_background">#FFF59D</color>   <!-- Muted Cheesy Yellow -->
+    <color name="app_surface">#FFF9C4</color>
+    <color name="app_on_surface">#424242</color>
+    <color name="app_card_bg">#FFFDE7</color>
+
+    <!-- Grid Colors (Strict Black/White for Mouse Tracking) -->
+    <color name="grid_primary">#000000</color>
+    <color name="grid_secondary">#FFFFFF</color>
+
+    <!-- Legacy / Utils -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="gray_800">#424242</color>
-    <color name="gray_100">#F5F5F5</color>
 </resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Semantic Colors (Adaptive - Night) -->
+    <color name="app_background">#121212</color>   <!-- Deep Dark -->
+    <color name="app_surface">#1E1E1E</color>
+    <color name="app_on_surface">#E0E0E0</color>
+    <color name="app_card_bg">#2D2D2D</color>
+
+    <!-- Grid Colors (Strict Black/White for Mouse Tracking) -->
+    <color name="grid_primary">#000000</color>
+    <color name="grid_secondary">#FFFFFF</color>
+
+    <!-- Brand Colors (Muted for Night) -->
+    <color name="cheese_primary">#F9A825</color>
+    <color name="cheese_text_on_primary">#000000</color>
+</resources>

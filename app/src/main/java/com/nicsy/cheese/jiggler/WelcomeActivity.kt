@@ -10,8 +10,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.nicsy.cheese.jiggler.layout.AppPreferences
@@ -36,6 +39,7 @@ class WelcomeActivity : AppCompatActivity() {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         
         prefs = AppPreferences(this)
@@ -46,6 +50,13 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_welcome)
+
+        val rootLayout = findViewById<View>(R.id.welcomeRootLayout)
+        ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         viewPager = findViewById(R.id.viewPager)
         btnNext = findViewById(R.id.btnNext)
@@ -99,9 +110,11 @@ class WelcomeActivity : AppCompatActivity() {
         for (i in 0 until childCount) {
             val imageView = layoutIndicators.getChildAt(i) as ImageView
             if (i == position) {
-                imageView.setBackgroundColor(Color.parseColor("#FFBB00")) // Active
+                // 테마의 primary 색상 사용
+                imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.cheese_primary))
             } else {
-                imageView.setBackgroundColor(Color.parseColor("#D1D1D1")) // Inactive
+                // 비활성 상태는 secondary 또는 연한 회색
+                imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.cheese_secondary))
             }
             // Dot size
             val size = if (i == position) 12 else 8

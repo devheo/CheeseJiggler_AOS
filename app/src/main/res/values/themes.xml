@@ -4,27 +4,23 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/cheese_primary</item>
         <item name="colorPrimaryVariant">@color/cheese_primary_variant</item>
-        <item name="colorOnPrimary">@color/cheese_text_on_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/cheese_secondary</item>
-        <item name="colorOnSecondary">@color/cheese_text_primary</item>
+        <item name="colorSecondary">@color/cheese_accent</item>
+        <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Background/Surface colors. -->
-        <item name="android:windowBackground">@color/cheese_bg_dark</item>
-        <item name="colorSurface">@color/cheese_surface_dark</item>
-        <item name="colorOnSurface">@color/cheese_text_on_dark</item>
+        <!-- Adaptive Background/Surface colors. -->
+        <item name="android:windowBackground">@color/app_background</item>
+        <item name="colorSurface">@color/app_surface</item>
+        <item name="colorOnSurface">@color/app_on_surface</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/android:windowBackground</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <!-- Specific style for Light screens (like Welcome) -->
-    <style name="Theme.CheeseJiggler.Light" parent="Theme.CheeseJiggler">
-        <item name="android:windowBackground">@color/cheese_bg_light</item>
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/cheese_text_primary</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    <style name="Theme.CheeseJiggler.Welcome" parent="Theme.CheeseJiggler">
+        <!-- Explicitly Creamy for Welcome if needed, but Theme.CheeseJiggler is now adaptive -->
     </style>
 </resources>

@@ -4,7 +4,7 @@
     android:id="@+id/settingsRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cheese_bg_dark"
+    android:background="@color/app_background"
     android:orientation="vertical">
 
     <!-- 상단 툴바 -->
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:text="@string/settings_speed_label"
-                android:textColor="@color/cheese_accent"
+                android:textColor="@color/cheese_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_speed_format"
-                    android:textColor="@color/cheese_text_on_dark"
+                    android:textColor="@color/app_on_surface"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -109,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_brightness_format"
-                    android:textColor="@color/cheese_text_on_dark"
+                    android:textColor="@color/app_on_surface"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -155,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_timer_infinite"
-                        android:textColor="@color/cheese_text_on_dark" />
+                        android:textColor="@color/app_on_surface" />
 
                     <RadioButton
                         android:id="@+id/rbTypeDuration"
@@ -163,7 +163,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_timer_duration"
-                        android:textColor="@color/cheese_text_on_dark" />
+                        android:textColor="@color/app_on_surface" />
 
                     <RadioButton
                         android:id="@+id/rbTypeTargetTime"
@@ -171,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_timer_target"
-                        android:textColor="@color/cheese_text_on_dark" />
+                        android:textColor="@color/app_on_surface" />
 
                     <RadioButton
                         android:id="@+id/rbTypeTimeRange"
@@ -179,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_timer_range"
-                        android:textColor="@color/cheese_text_on_dark" />
+                        android:textColor="@color/app_on_surface" />
                 </RadioGroup>
 
                 <!-- 1) DURATION -->
@@ -205,7 +205,7 @@
                         android:backgroundTint="@color/cheese_primary"
                         android:inputType="number"
                         android:text="30"
-                        android:textColor="@color/cheese_text_on_dark" />
+                        android:textColor="@color/app_on_surface" />
                 </LinearLayout>
 
                 <!-- 2) TARGET_TIME -->
@@ -303,7 +303,7 @@
                             android:backgroundTint="@color/cheese_primary"
                             android:inputType="number"
                             android:text="10"
-                            android:textColor="@color/cheese_text_on_dark" />
+                            android:textColor="@color/app_on_surface" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -326,7 +326,7 @@
                             android:backgroundTint="@color/cheese_primary"
                             android:inputType="number"
                             android:text="30"
-                            android:textColor="@color/cheese_text_on_dark" />
+                            android:textColor="@color/app_on_surface" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -366,7 +366,7 @@
                             android:layout_weight="1"
                             android:buttonTint="@color/cheese_primary"
                             android:text="@string/settings_tile_basic"
-                            android:textColor="@color/cheese_text_on_dark" />
+                            android:textColor="@color/app_on_surface" />
                         <ImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
@@ -387,7 +387,7 @@
                             android:layout_weight="1"
                             android:buttonTint="@color/cheese_primary"
                             android:text="@string/settings_tile_grid"
-                            android:textColor="@color/cheese_text_on_dark" />
+                            android:textColor="@color/app_on_surface" />
                         <ImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
@@ -409,7 +409,7 @@
                             android:layout_weight="1"
                             android:buttonTint="@color/cheese_primary"
                             android:text="@string/settings_tile_v_stripe"
-                            android:textColor="@color/cheese_text_on_dark" />
+                            android:textColor="@color/app_on_surface" />
                         <ImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
@@ -430,7 +430,7 @@
                             android:layout_weight="1"
                             android:buttonTint="@color/cheese_primary"
                             android:text="@string/settings_tile_d_stripe"
-                            android:textColor="@color/cheese_text_on_dark" />
+                            android:textColor="@color/app_on_surface" />
                         <ImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
@@ -451,7 +451,7 @@
                             android:layout_weight="1"
                             android:buttonTint="@color/cheese_primary"
                             android:text="@string/settings_tile_dots"
-                            android:textColor="@color/cheese_text_on_dark" />
+                            android:textColor="@color/app_on_surface" />
                         <ImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
@@ -491,7 +491,7 @@
                         android:buttonTint="@color/cheese_primary"
                         android:checked="true"
                         android:text="@string/settings_move_basic"
-                        android:textColor="@color/cheese_text_on_dark" />
+                        android:textColor="@color/app_on_surface" />
 
                     <RadioButton
                         android:id="@+id/rbPatternCircle"
@@ -499,7 +499,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_move_circle"
-                        android:textColor="@color/cheese_text_on_dark" />
+                        android:textColor="@color/app_on_surface" />
 
                     <RadioButton
                         android:id="@+id/rbPatternZigzag"
@@ -507,7 +507,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_move_zigzag"
-                        android:textColor="@color/cheese_text_on_dark" />
+                        android:textColor="@color/app_on_surface" />
 
                     <RadioButton
                         android:id="@+id/rbPatternMicro"
@@ -515,7 +515,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_move_micro"
-                        android:textColor="@color/cheese_text_on_dark" />
+                        android:textColor="@color/app_on_surface" />
                 </RadioGroup>
 
             </LinearLayout>

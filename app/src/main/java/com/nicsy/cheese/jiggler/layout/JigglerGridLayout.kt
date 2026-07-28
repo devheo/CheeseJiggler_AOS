@@ -8,6 +8,8 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.core.content.ContextCompat
+import com.nicsy.cheese.jiggler.R
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -137,9 +139,9 @@ class JigglerGridLayout @JvmOverloads constructor(
 
     private fun drawTile(canvas: Canvas, x: Float, y: Float, row: Int, col: Int) {
         val isBlack = (row + col) % 2 == 0
-        // 명암 대비 완화: 순수 흑백 대신 짙은 회색과 밝은 회색 사용
-        val primaryColor = if (isBlack) Color.parseColor("#212121") else Color.parseColor("#F5F5F5")
-        val secondaryColor = if (isBlack) Color.parseColor("#F5F5F5") else Color.parseColor("#212121")
+        // 테마에 따라 변하는 리소스 색상 사용
+        val primaryColor = ContextCompat.getColor(context, if (isBlack) R.color.grid_primary else R.color.grid_secondary)
+        val secondaryColor = ContextCompat.getColor(context, if (isBlack) R.color.grid_secondary else R.color.grid_primary)
 
         when (currentTileType) {
             TileType.BASIC -> {
