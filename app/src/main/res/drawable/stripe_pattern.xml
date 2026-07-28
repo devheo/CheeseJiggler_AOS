@@ -1,0 +1,11 @@
+<!-- res/drawable/bg_grid_repeat.xml -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@android:color/transparent">
+    <item>
+        <bitmap
+            android:src="@drawable/pattern_basic_grid"
+            android:tileMode="repeat"
+            android:tileModeX="repeat"
+            android:tileModeY="repeat" />
+    </item>
+</ripple>

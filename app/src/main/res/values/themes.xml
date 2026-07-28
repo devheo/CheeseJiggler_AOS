@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- parent가 반드시 Theme.AppCompat 또는 Theme.MaterialComponents 여야 합니다 -->
+    <style name="Theme.CheeseJiggler" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <!-- ... 기타 속성들 ... -->
+    </style>
+</resources>

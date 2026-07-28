@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Cheese Jiggler</string>
+    <string name="settings_title">Settings</string>
+
+    <!-- Main Activity -->
+    <string name="main_stealth_label">Stealth</string>
+    <string name="main_settings_desc">Settings</string>
+    <string name="main_play_desc">Start/Stop</string>
+    <string name="stop_by_user">Stopped by user.</string>
+    <string name="exit_double_tap">Press back again to exit.</string>
+    <string name="stop_timer_finished">Set time has been completed.</string>
+
+    <!-- Status Messages -->
+    <string name="status_running_range">Running (%1$02d:%2$02d ~ %3$02d:%4$02d)</string>
+    <string name="status_waiting_range">Waiting (Start: %1$02d:%2$02d)</string>
+    <string name="status_stealth_active">Stealth Active (%1$ds)</string>
+    <string name="status_stealth_rest">Stealth Resting (%1$ds)</string>
+    <string name="status_remaining_time">Time left: %1$02d:%2$02d</string>
+
+    <!-- Settings Activity -->
+    <string name="settings_toolbar_title">Jiggler Settings</string>
+    <string name="settings_back_desc">Back</string>
+
+    <string name="settings_speed_label">Speed Settings</string>
+    <string name="settings_speed_format">Animation Speed: %.1fx</string>
+
+    <string name="settings_brightness_label">Brightness Settings</string>
+    <string name="settings_brightness_format">Screen Brightness: %d%%</string>
+
+    <string name="settings_timer_options_label">Operation &amp; Exit Options</string>
+    <string name="settings_timer_infinite">Run until manual stop (Default)</string>
+    <string name="settings_timer_duration">1. Run for set duration (Default 30m)</string>
+    <string name="settings_timer_target">2. Exit at target time (e.g., 18:00)</string>
+    <string name="settings_timer_range">3. Run within time range</string>
+
+    <string name="settings_duration_label">Duration (min): </string>
+    <string name="settings_start_time_label">Select Start Time:</string>
+    <string name="settings_end_time_label">Select End Time:</string>
+
+    <string name="settings_stealth_label">Stealth Mode Settings</string>
+    <string name="settings_stealth_active_label">Play Time (sec):</string>
+    <string name="settings_stealth_rest_label">Rest Time (sec):</string>
+
+    <string name="settings_tile_label">Tile Pattern Settings</string>
+    <string name="settings_tile_basic">Basic Checkerboard</string>
+    <string name="settings_tile_grid">Complex Grid</string>
+    <string name="settings_tile_v_stripe">Vertical Stripe</string>
+    <string name="settings_tile_d_stripe">Diagonal Stripe</string>
+    <string name="settings_tile_dots">High Density Dots</string>
+
+    <string name="settings_move_pattern_label">Movement Pattern</string>
+    <string name="settings_move_basic">Straight Down (Default)</string>
+    <string name="settings_move_circle">Circle</string>
+    <string name="settings_move_zigzag">Zigzag</string>
+    <string name="settings_move_micro">Micro Vibe</string>
+
+    <string name="settings_save_button">Save Settings</string>
+    <string name="settings_saved">Settings have been saved.</string>
+
+    <!-- Welcome Activity -->
+    <string name="welcome_title">Welcome to CheeseJiggler! 🧀</string>
+    <string name="welcome_desc">Prevent screen locking while you are away\nand avoid the hassle of re-authentication.\n\nDeveloped with good intentions, enjoy!</string>
+    <string name="welcome_start_button">Get Started</string>
+    <string name="welcome_next_button">Next</string>
+
+    <string name="welcome_step1_title">Welcome! 🧀</string>
+    <string name="welcome_step1_desc">CheeseJiggler keeps your screen awake\nso your workflow remains uninterrupted.</string>
+
+    <string name="welcome_step2_title">Place Your Mouse 🖱️</string>
+    <string name="welcome_step2_desc">Simply place the sensor of your mouse\ndirectly on top of the phone screen.</string>
+
+    <string name="welcome_step3_title">Optical Mouse Only 🔴</string>
+    <string name="welcome_step3_desc">This app works only with optical sensor mice.\n(Ball or some laser mice may not be supported.)</string>
+</resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainRootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="#121212">
+
+    <!-- 바둑판 지글러 화면 -->
+    <com.nicsy.cheese.jiggler.layout.JigglerGridLayout
+        android:id="@+id/jigglerGridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
+    <!-- 우측 상단 설정 버튼 (나사/톱니바퀴 모양 아이콘) -->
+    <ImageButton
+        android:id="@+id/btnSettings"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/main_settings_desc"
+        android:src="@drawable/ico_app_settings"
+        android:scaleType="fitCenter"
+        android:padding="2dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:tint="@null" />
+
+    <!-- 상태 및 안내 텍스트 -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/layoutMainStealth"
+        android:layout_marginBottom="16dp"
+        android:textColor="#FFBB00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/layoutMainStealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/fabPlay"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_stealth_label"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swMainStealth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:thumbTint="#FFBB00"
+            app:trackTint="#775500" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabPlay"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="@string/main_play_desc"
+        android:src="@drawable/ico_app_play"
+        app:maxImageSize="72dp"
+        android:scaleType="centerCrop"
+        app:fabCustomSize="80dp"
+        app:tint="@null"
+        app:backgroundTint="#FFBB00" />
+</RelativeLayout>

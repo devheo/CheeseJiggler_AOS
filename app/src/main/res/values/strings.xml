@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">CheeseJiggler</string>
+    <string name="settings_title">설정</string>
+
+    <!-- Main Activity -->
+    <string name="main_stealth_label">스텔스</string>
+    <string name="main_settings_desc">설정</string>
+    <string name="main_play_desc">시작/멈춤</string>
+    <string name="stop_by_user">사용자가 정지했습니다.</string>
+    <string name="exit_double_tap">한 번 더 누르면 종료됩니다.</string>
+    <string name="stop_timer_finished">설정한 시간이 완료되었습니다.</string>
+
+    <!-- Status Messages -->
+    <string name="status_running_range">작동 중 (%1$02d:%2$02d ~ %3$02d:%4$02d 범위 내)</string>
+    <string name="status_waiting_range">작동 대기 중 (시작 시각: %1$02d:%2$02d)</string>
+    <string name="status_stealth_active">스텔스 작동 중 (%1$d초)</string>
+    <string name="status_stealth_rest">스텔스 휴식 중 (%1$d초)</string>
+    <string name="status_remaining_time">남은 시간: %1$02d:%2$02d</string>
+
+    <!-- Settings Activity -->
+    <string name="settings_toolbar_title">짜글이 설정</string>
+    <string name="settings_back_desc">뒤로가기</string>
+
+    <string name="settings_speed_label">속도 설정</string>
+    <string name="settings_speed_format">애니메이션 속도: %.1fx</string>
+
+    <string name="settings_brightness_label">밝기 설정</string>
+    <string name="settings_brightness_format">화면 밝기 고정: %d%%</string>
+
+    <string name="settings_timer_options_label">작동 및 종료 옵션</string>
+    <string name="settings_timer_infinite">수동 정지 전까지 계속 작동 (기본)</string>
+    <string name="settings_timer_duration">1. 입력한 시간 동안 작동 (기본 30분)</string>
+    <string name="settings_timer_target">2. 지정한 시각에 종료 (예: 18:00)</string>
+    <string name="settings_timer_range">3. 지정한 시간 사이에만 작동</string>
+
+    <string name="settings_duration_label">작동 시간(분): </string>
+    <string name="settings_start_time_label">시작 시간 선택:</string>
+    <string name="settings_end_time_label">종료 시간 선택:</string>
+
+    <string name="settings_stealth_label">스텔스 작동 시간 설정</string>
+    <string name="settings_stealth_active_label">플레이 타임(초):</string>
+    <string name="settings_stealth_rest_label">휴식 타임(초):</string>
+
+    <string name="settings_tile_label">타일 패턴 설정</string>
+    <string name="settings_tile_basic">기본 바둑판 (흑/백)</string>
+    <string name="settings_tile_grid">복합 격자</string>
+    <string name="settings_tile_v_stripe">수직 스트라이프</string>
+    <string name="settings_tile_d_stripe">대각선 스트라이프</string>
+    <string name="settings_tile_dots">고밀도 점 패턴</string>
+
+    <string name="settings_move_pattern_label">움직임 패턴</string>
+    <string name="settings_move_basic">직선 하강 (기본)</string>
+    <string name="settings_move_circle">원형 (Circle)</string>
+    <string name="settings_move_zigzag">지그재그 (Zigzag)</string>
+    <string name="settings_move_micro">미세 떨림 (Micro)</string>
+
+    <string name="settings_save_button">저장하기</string>
+    <string name="settings_saved">설정이 저장되었습니다.</string>
+
+    <!-- Welcome Activity -->
+    <string name="welcome_title">치즈지글러에 오신 것을 환영합니다! 🧀</string>
+    <string name="welcome_desc">자리를 비우는 사이 화면이 잠겨 발생하는\n재인증의 불편함을 방지하기 위해 만들었습니다.\n\n좋은 취지로 개발되었으니 유용하게 사용해 주세요!</string>
+    <string name="welcome_start_button">시작하기</string>
+    <string name="welcome_next_button">다음</string>
+
+    <string name="welcome_step1_title">환영합니다! 🧀</string>
+    <string name="welcome_step1_desc">치즈지글러는 작업 흐름이 끊기지 않도록\n화면 켜짐을 안정적으로 유지해 줍니다.</string>
+
+    <string name="welcome_step2_title">마우스를 올려주세요 🖱️</string>
+    <string name="welcome_step2_desc">앱을 실행한 후, 휴대폰 화면 위에\n마우스의 센서 부분을 올려두기만 하면 됩니다.</string>
+
+    <string name="welcome_step3_title">광학 마우스 전용 🔴</string>
+    <string name="welcome_step3_desc">이 앱은 빛을 감지하는 광학(Optical) 센서\n마우스에서만 작동합니다.\n(볼 마우스나 레이저 일부는 미지원)</string>
+</resources>

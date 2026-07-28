@@ -1,0 +1,18 @@
+<!-- res/drawable/pattern_basic_grid.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="40dp"
+    android:viewportWidth="40"
+    android:viewportHeight="40">
+
+    <!-- 배경색 (원하는 색상으로 변경 가능, 투명을 원하시면 이 path를 지우세요) -->
+    <path
+        android:fillColor="#F5F5F5"
+        android:pathData="M0,0h40v40h-40z" />
+
+    <!-- 격자 선 (두께 1dp, 격자 크기 40dp) -->
+    <path
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="1"
+        android:pathData="M 0,0 L 40,0 M 0,0 L 0,40" />
+</vector>
