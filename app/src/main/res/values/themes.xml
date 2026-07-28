@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- parent가 반드시 Theme.AppCompat 또는 Theme.MaterialComponents 여야 합니다 -->
     <style name="Theme.CheeseJiggler" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <!-- ... 기타 속성들 ... -->
+        <item name="colorPrimary">@color/cheese_primary</item>
+        <item name="colorPrimaryVariant">@color/cheese_primary_variant</item>
+        <item name="colorOnPrimary">@color/cheese_text_on_primary</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/cheese_secondary</item>
+        <item name="colorOnSecondary">@color/cheese_text_primary</item>
+
+        <!-- Background/Surface colors. -->
+        <item name="android:windowBackground">@color/cheese_bg_dark</item>
+        <item name="colorSurface">@color/cheese_surface_dark</item>
+        <item name="colorOnSurface">@color/cheese_text_on_dark</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/android:windowBackground</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+    </style>
+
+    <!-- Specific style for Light screens (like Welcome) -->
+    <style name="Theme.CheeseJiggler.Light" parent="Theme.CheeseJiggler">
+        <item name="android:windowBackground">@color/cheese_bg_light</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/cheese_text_primary</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 </resources>

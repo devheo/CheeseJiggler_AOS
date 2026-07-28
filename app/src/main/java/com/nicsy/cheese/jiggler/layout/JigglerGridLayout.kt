@@ -137,8 +137,9 @@ class JigglerGridLayout @JvmOverloads constructor(
 
     private fun drawTile(canvas: Canvas, x: Float, y: Float, row: Int, col: Int) {
         val isBlack = (row + col) % 2 == 0
-        val primaryColor = if (isBlack) Color.BLACK else Color.WHITE
-        val secondaryColor = if (isBlack) Color.WHITE else Color.BLACK
+        // 명암 대비 완화: 순수 흑백 대신 짙은 회색과 밝은 회색 사용
+        val primaryColor = if (isBlack) Color.parseColor("#212121") else Color.parseColor("#F5F5F5")
+        val secondaryColor = if (isBlack) Color.parseColor("#F5F5F5") else Color.parseColor("#212121")
 
         when (currentTileType) {
             TileType.BASIC -> {

@@ -14,6 +14,7 @@
             android:name="com.nicsy.cheese.jiggler.WelcomeActivity"
             android:exported="true"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.CheeseJiggler.Light"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

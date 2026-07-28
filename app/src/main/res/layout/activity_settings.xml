@@ -4,7 +4,7 @@
     android:id="@+id/settingsRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212"
+    android:background="@color/cheese_bg_dark"
     android:orientation="vertical">
 
     <!-- 상단 툴바 -->
@@ -24,14 +24,14 @@
             android:padding="12dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_back_arrow"
-            app:tint="#FFBB00" />
+            app:tint="@color/cheese_primary" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/settings_toolbar_title"
-            android:textColor="#FFBB00"
+            android:textColor="@color/cheese_primary"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -45,32 +45,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="24dp">
 
             <!-- 1. 속도 조절 카드 -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:text="@string/settings_speed_label"
-                android:textColor="#FFC107"
+                android:textColor="@color/cheese_accent"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/bg_cheese_card"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <TextView
                     android:id="@+id/tvSpeedTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_speed_format"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/cheese_text_on_dark"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -78,38 +78,38 @@
                     android:id="@+id/sbSpeed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
                     android:max="20"
                     android:progress="5"
-                    android:progressTint="#FFBB00"
-                    android:thumbTint="#FFBB00" />
+                    android:progressTint="@color/cheese_primary"
+                    android:thumbTint="@color/cheese_primary" />
             </LinearLayout>
 
             <!-- 1.2 밝기 조절 카드 -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:text="@string/settings_brightness_label"
-                android:textColor="#FFC107"
+                android:textColor="@color/cheese_accent"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/bg_cheese_card"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <TextView
                     android:id="@+id/tvBrightnessTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_brightness_format"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/cheese_text_on_dark"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -117,31 +117,31 @@
                     android:id="@+id/sbBrightness"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
                     android:max="100"
                     android:progress="50"
-                    android:progressTint="#FFBB00"
-                    android:thumbTint="#FFBB00" />
+                    android:progressTint="@color/cheese_primary"
+                    android:thumbTint="@color/cheese_primary" />
             </LinearLayout>
 
             <!-- 2. 동작 및 종료 옵션 카드 -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:text="@string/settings_timer_options_label"
-                android:textColor="#FFC107"
+                android:textColor="@color/cheese_accent"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/bg_cheese_card"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <RadioGroup
                     android:id="@+id/rgTimerType"
@@ -153,33 +153,33 @@
                         android:id="@+id/rbTypeInfinite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="#FFBB00"
+                        android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_timer_infinite"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="@color/cheese_text_on_dark" />
 
                     <RadioButton
                         android:id="@+id/rbTypeDuration"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="#FFBB00"
+                        android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_timer_duration"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="@color/cheese_text_on_dark" />
 
                     <RadioButton
                         android:id="@+id/rbTypeTargetTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="#FFBB00"
+                        android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_timer_target"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="@color/cheese_text_on_dark" />
 
                     <RadioButton
                         android:id="@+id/rbTypeTimeRange"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="#FFBB00"
+                        android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_timer_range"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="@color/cheese_text_on_dark" />
                 </RadioGroup>
 
                 <!-- 1) DURATION -->
@@ -196,16 +196,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/settings_duration_label"
-                        android:textColor="#FFBB00" />
+                        android:textColor="@color/cheese_primary" />
 
                     <EditText
                         android:id="@+id/etDurationMinutes"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#FFBB00"
+                        android:backgroundTint="@color/cheese_primary"
                         android:inputType="number"
                         android:text="30"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="@color/cheese_text_on_dark" />
                 </LinearLayout>
 
                 <!-- 2) TARGET_TIME -->
@@ -216,6 +216,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="12dp"
                     android:timePickerMode="spinner"
+                    android:theme="@style/Widget.MaterialComponents.TimePicker"
                     android:visibility="gone" />
 
                 <!-- 4) TIME_RANGE -->
@@ -231,7 +232,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/settings_start_time_label"
-                        android:textColor="#FFBB00"
+                        android:textColor="@color/cheese_primary"
                         android:textStyle="bold" />
 
                     <TimePicker
@@ -246,7 +247,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:text="@string/settings_end_time_label"
-                        android:textColor="#FFBB00"
+                        android:textColor="@color/cheese_primary"
                         android:textStyle="bold" />
 
                     <TimePicker
@@ -263,19 +264,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:text="@string/settings_stealth_label"
-                android:textColor="#FFC107"
+                android:textColor="@color/cheese_accent"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/bg_cheese_card"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <LinearLayout
                     android:id="@+id/layoutStealth"
@@ -290,42 +291,42 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_stealth_active_label"
-                            android:textColor="#FFBB00" />
+                            android:textColor="@color/cheese_primary" />
 
                         <EditText
                             android:id="@+id/etStealthActive"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#FFBB00"
+                            android:backgroundTint="@color/cheese_primary"
                             android:inputType="number"
                             android:text="10"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="@color/cheese_text_on_dark" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_stealth_rest_label"
-                            android:textColor="#FFBB00" />
+                            android:textColor="@color/cheese_primary" />
 
                         <EditText
                             android:id="@+id/etStealthRest"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#FFBB00"
+                            android:backgroundTint="@color/cheese_primary"
                             android:inputType="number"
                             android:text="30"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="@color/cheese_text_on_dark" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -334,19 +335,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:text="@string/settings_tile_label"
-                android:textColor="#FFC107"
+                android:textColor="@color/cheese_accent"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/bg_cheese_card"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <RadioGroup
                     android:id="@+id/rgTileType"
@@ -363,19 +364,20 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:buttonTint="#FFBB00"
+                            android:buttonTint="@color/cheese_primary"
                             android:text="@string/settings_tile_basic"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="@color/cheese_text_on_dark" />
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/tile_preview_basic" />
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/tile_preview_basic"
+                            android:padding="4dp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
                         <RadioButton
@@ -383,19 +385,21 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:buttonTint="#FFBB00"
+                            android:buttonTint="@color/cheese_primary"
                             android:text="@string/settings_tile_grid"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="@color/cheese_text_on_dark" />
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/tile_preview_grid" />
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/tile_preview_grid"
+                            android:padding="4dp" />
                     </LinearLayout>
 
+                    <!-- ... other tiles follow same pattern ... -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
                         <RadioButton
@@ -403,19 +407,20 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:buttonTint="#FFBB00"
+                            android:buttonTint="@color/cheese_primary"
                             android:text="@string/settings_tile_v_stripe"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="@color/cheese_text_on_dark" />
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/tile_preview_v_stripe" />
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/tile_preview_v_stripe"
+                            android:padding="4dp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
                         <RadioButton
@@ -423,19 +428,20 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:buttonTint="#FFBB00"
+                            android:buttonTint="@color/cheese_primary"
                             android:text="@string/settings_tile_d_stripe"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="@color/cheese_text_on_dark" />
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/tile_preview_d_stripe" />
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/tile_preview_d_stripe"
+                            android:padding="4dp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
                         <RadioButton
@@ -443,13 +449,14 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:buttonTint="#FFBB00"
+                            android:buttonTint="@color/cheese_primary"
                             android:text="@string/settings_tile_dots"
-                            android:textColor="#FFFFFF" />
+                            android:textColor="@color/cheese_text_on_dark" />
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/tile_preview_dots" />
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/tile_preview_dots"
+                            android:padding="4dp" />
                     </LinearLayout>
                 </RadioGroup>
             </LinearLayout>
@@ -458,19 +465,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:text="@string/settings_move_pattern_label"
-                android:textColor="#FFC107"
+                android:textColor="@color/cheese_accent"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/bg_cheese_card"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <RadioGroup
                     android:id="@+id/rgMovePattern"
@@ -481,50 +488,52 @@
                         android:id="@+id/rbPatternBasic"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="#FFBB00"
+                        android:buttonTint="@color/cheese_primary"
                         android:checked="true"
                         android:text="@string/settings_move_basic"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="@color/cheese_text_on_dark" />
 
                     <RadioButton
                         android:id="@+id/rbPatternCircle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="#FFBB00"
+                        android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_move_circle"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="@color/cheese_text_on_dark" />
 
                     <RadioButton
                         android:id="@+id/rbPatternZigzag"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="#FFBB00"
+                        android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_move_zigzag"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="@color/cheese_text_on_dark" />
 
                     <RadioButton
                         android:id="@+id/rbPatternMicro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:buttonTint="#FFBB00"
+                        android:buttonTint="@color/cheese_primary"
                         android:text="@string/settings_move_micro"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="@color/cheese_text_on_dark" />
                 </RadioGroup>
 
             </LinearLayout>
 
             <!-- 저장하기 버튼 -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="64dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="24dp"
-                android:backgroundTint="#FFBB00"
+                android:layout_marginBottom="32dp"
                 android:text="@string/settings_save_button"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp"
+                app:backgroundTint="@color/cheese_primary"
+                android:textColor="@color/cheese_text_on_primary" />
 
         </LinearLayout>
     </ScrollView>

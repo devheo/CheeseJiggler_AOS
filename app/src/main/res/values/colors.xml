@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <!-- Core Cheese Palette -->
+    <color name="cheese_primary">#FFB300</color>    <!-- Amber 600 -->
+    <color name="cheese_primary_variant">#FFA000</color>
+    <color name="cheese_secondary">#FFECB3</color>  <!-- Amber 100 -->
+    <color name="cheese_accent">#FFD54F</color>     <!-- Amber 300 -->
+
+    <!-- Backgrounds & Surfaces -->
+    <color name="cheese_bg_light">#FFFDE7</color>   <!-- Yellow 50 (Creamy) -->
+    <color name="cheese_bg_dark">#1A1A1A</color>    <!-- Soft Dark Gray -->
+    <color name="cheese_surface_dark">#2D2D2D</color> <!-- Card/Surface Gray -->
+
+    <!-- Text Colors -->
+    <color name="cheese_text_primary">#212121</color>
+    <color name="cheese_text_secondary">#757575</color>
+    <color name="cheese_text_on_dark">#E0E0E0</color>
+    <color name="cheese_text_on_primary">#000000</color>
+
+    <!-- Semantic / Legacy -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray_800">#424242</color>
+    <color name="gray_100">#F5F5F5</color>
 </resources>

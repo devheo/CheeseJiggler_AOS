@@ -4,7 +4,7 @@
     android:id="@+id/welcomeRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF9E3">
+    android:background="@color/cheese_bg_light">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -21,26 +21,27 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:padding="32dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <!-- 간단한 점 모양 인디케이터 (코드에서 관리하거나 TabLayout 연동 가능) -->
         <LinearLayout
             android:id="@+id/layoutIndicators"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="32dp"
             android:orientation="horizontal" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNext"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:backgroundTint="#FFBB00"
+            android:layout_height="64dp"
             android:text="@string/welcome_next_button"
-            android:textColor="@android:color/black"
+            android:textAllCaps="false"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:backgroundTint="@color/cheese_primary"
+            android:textColor="@color/cheese_text_on_primary" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
