@@ -2,6 +2,9 @@ package com.nicsy.cheese.jiggler.layout
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.nicsy.cheese.jiggler.data.Bookmark
 
 class AppPreferences(context: Context) {
 
@@ -25,7 +28,10 @@ class AppPreferences(context: Context) {
         private const val KEY_END_MINUTE = "key_end_minute"
         private const val KEY_TILE_TYPE = "key_tile_type"
         private const val KEY_IS_FIRST_RUN = "key_is_first_run"
+        private const val KEY_BOOKMARKS = "key_bookmarks"
     }
+
+    private val gson = Gson()
 
     var isFirstRun: Boolean
         get() = prefs.getBoolean(KEY_IS_FIRST_RUN, true)
@@ -136,4 +142,31 @@ class AppPreferences(context: Context) {
         set(value) {
             prefs.edit().putInt(KEY_END_MINUTE, value).apply()
         }
+
+    fun getBookmarks(): List<Bookmark> {
+        val json = prefs.getString(KEY_BOOKMARKS, null) ?: return emptyList()
+        val type = object : TypeToken<List<Bookmark>>() {}.type
+        return try {
+            gson.fromJson(json, type)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    fun saveBookmarks(bookmarks: List<Bookmark>) {
+        val json = gson.toJson(bookmarks)
+        prefs.edit().putString(KEY_BOOKMARKS, json).apply()
+    }
+
+    fun addBookmark(bookmark: Bookmark) {
+        val list = getBookmarks().toMutableList()
+        list.add(bookmark)
+        saveBookmarks(list)
+    }
+
+    fun removeBookmark(id: Long) {
+        val list = getBookmarks().toMutableList()
+        list.removeAll { it.id == id }
+        saveBookmarks(list)
+    }
 }

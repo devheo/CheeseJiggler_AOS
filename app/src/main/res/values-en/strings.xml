@@ -57,6 +57,15 @@
     <string name="settings_save_button">Save Settings</string>
     <string name="settings_saved">Settings have been saved.</string>
 
+    <!-- Bookmarks -->
+    <string name="bookmarks_title">Bookmarks</string>
+    <string name="bookmark_save_title">Save as Preset</string>
+    <string name="bookmark_name_hint">Preset Name</string>
+    <string name="bookmark_delete_confirm">Delete this preset?</string>
+    <string name="bookmark_empty">No presets saved.</string>
+    <string name="bookmark_applied">Preset applied!</string>
+    <string name="bookmark_add_title">Save current settings</string>
+
     <!-- Welcome Activity -->
     <string name="welcome_title">Welcome to CheeseJiggler! 🧀</string>
     <string name="welcome_desc">Prevent screen locking while you are away\nand avoid the hassle of re-authentication.\n\nDeveloped with good intentions, enjoy!</string>

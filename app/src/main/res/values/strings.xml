@@ -57,6 +57,15 @@
     <string name="settings_save_button">저장하기</string>
     <string name="settings_saved">설정이 저장되었습니다.</string>
 
+    <!-- Bookmarks -->
+    <string name="bookmarks_title">북마크</string>
+    <string name="bookmark_save_title">프리셋으로 저장</string>
+    <string name="bookmark_name_hint">프리셋 이름</string>
+    <string name="bookmark_delete_confirm">이 프리셋을 삭제할까요?</string>
+    <string name="bookmark_empty">저장된 프리셋이 없습니다.</string>
+    <string name="bookmark_applied">프리셋이 적용되었습니다!</string>
+    <string name="bookmark_add_title">현재 설정 저장</string>
+
     <!-- Welcome Activity -->
     <string name="welcome_title">치즈지글러에 오신 것을 환영합니다! 🧀</string>
     <string name="welcome_desc">자리를 비우는 사이 화면이 잠겨 발생하는\n재인증의 불편함을 방지하기 위해 만들었습니다.\n\n좋은 취지로 개발되었으니 유용하게 사용해 주세요!</string>

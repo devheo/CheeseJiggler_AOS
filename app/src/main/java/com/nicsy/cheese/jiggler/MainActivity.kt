@@ -127,6 +127,12 @@ class MainActivity : ComponentActivity() {
         onBackPressedDispatcher.addCallback(this, callback)
     }
 
+    override fun onResume() {
+        super.onResume()
+        // 설정이나 북마크에서 돌아왔을 때 스텔스 스위치 상태 업데이트
+        swMainStealth.isChecked = prefs.isStealthEnabled
+    }
+
     private fun startJiggler() {
         isRunning = true
         fabPlay.setImageResource(R.drawable.ico_app_stop)
