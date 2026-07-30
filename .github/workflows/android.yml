@@ -29,7 +29,14 @@ jobs:
     - name: Decode Keystore
       if: startsWith(github.ref, 'refs/tags/v')
       run: |
-        printf "%s" "${{ secrets.SET_SIGNING_NICSY_STORE_FILE_BASE64 }}" | base64 --decode > release.jks
+        # 공백이나 줄바꿈을 제거한 후 디코딩하여 파일 손상 방지
+        printf "%s" "${{ secrets.SET_SIGNING_NICSY_STORE_FILE_BASE64 }}" | tr -d '[:space:]' | base64 --decode > release.jks
+        
+        # [검증] 파일 존재 여부 및 크기 확인
+        ls -lh release.jks
+        
+        # [검증] 키스토어 유효성 확인 (비밀번호 노출 없이 구조만 체크)
+        keytool -list -keystore release.jks -storepass "${{ secrets.SET_SIGNING_NICSY_STORE_PASSWORD }}" > /dev/null && echo "✅ Keystore is valid." || (echo "❌ Keystore is INVALID!" && exit 1)
 
     - name: Build with Gradle
       env:
