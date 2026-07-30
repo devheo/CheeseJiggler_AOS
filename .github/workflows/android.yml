@@ -29,7 +29,7 @@ jobs:
     - name: Decode Keystore
       if: startsWith(github.ref, 'refs/tags/v')
       run: |
-        echo "${{ secrets.SET_SIGNING_NICSY_STORE_FILE_BASE64 }}" | base64 --decode > release.jks
+        printf "%s" "${{ secrets.SET_SIGNING_NICSY_STORE_FILE_BASE64 }}" | base64 --decode > release.jks
 
     - name: Build with Gradle
       env:
