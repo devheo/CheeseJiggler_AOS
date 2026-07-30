@@ -28,15 +28,26 @@ jobs:
 
     - name: Decode Keystore
       if: startsWith(github.ref, 'refs/tags/v')
+      env:
+        ENCODED_KEYSTORE: ${{ secrets.SET_SIGNING_NICSY_STORE_FILE_BASE64 }}
       run: |
-        # 공백이나 줄바꿈을 제거한 후 디코딩하여 파일 손상 방지
-        printf "%s" "${{ secrets.SET_SIGNING_NICSY_STORE_FILE_BASE64 }}" | tr -d '[:space:]' | base64 --decode > release.jks
+        if [ -z "$ENCODED_KEYSTORE" ]; then
+          echo "❌ Error: SET_SIGNING_NICSY_STORE_FILE_BASE64 secret is missing!"
+          echo "Please add it to GitHub Settings > Secrets and variables > Actions > Repository secrets."
+          exit 1
+        fi
         
-        # [검증] 파일 존재 여부 및 크기 확인
-        ls -lh release.jks
+        # Decode and handle potential whitespace/newlines
+        echo "$ENCODED_KEYSTORE" | tr -d '[:space:]' | base64 --decode > release.jks
         
-        # [검증] 키스토어 유효성 확인 (비밀번호 노출 없이 구조만 체크)
-        keytool -list -keystore release.jks -storepass "${{ secrets.SET_SIGNING_NICSY_STORE_PASSWORD }}" > /dev/null && echo "✅ Keystore is valid." || (echo "❌ Keystore is INVALID!" && exit 1)
+        # Verify file exists and is not empty
+        if [ ! -s release.jks ]; then
+          echo "❌ Error: Decoded keystore file is empty. Check your Base64 value."
+          exit 1
+        fi
+        
+        # Verify keystore validity with keytool
+        keytool -list -keystore release.jks -storepass "${{ secrets.SET_SIGNING_NICSY_STORE_PASSWORD }}" > /dev/null && echo "✅ Keystore is valid." || (echo "❌ Keystore is INVALID! Check your password and file data." && exit 1)
 
     - name: Build with Gradle
       env:
