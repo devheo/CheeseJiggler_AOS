@@ -40,16 +40,27 @@ jobs:
       run: |
         if [[ $GITHUB_REF == refs/tags/v* ]]; then
           VERSION_NAME=${GITHUB_REF#refs/tags/v}
-          ./gradlew assembleProdRelease -PversionCode=${{ github.run_number }} -PversionName=$VERSION_NAME
+          ./gradlew :app:assembleProdRelease -PversionCode=${{ github.run_number }} -PversionName=$VERSION_NAME
         else
-          ./gradlew assembleDevDebug -PversionCode=${{ github.run_number }}
+          ./gradlew :app:assembleDevDebug -PversionCode=${{ github.run_number }}
         fi
 
-    - name: Rename and Prepare APK
+    - name: Rename and Prepare APK (Robust)
       if: startsWith(github.ref, 'refs/tags/v')
       run: |
         TAG_NAME=${GITHUB_REF#refs/tags/}
-        mv app/build/outputs/apk/prod/release/app-prod-release.apk app/build/outputs/apk/prod/release/CheeseJiggler_$TAG_NAME.apk
+        # List all generated APKs for debugging
+        find app/build/outputs/apk/ -name "*.apk"
+        # Rename the production release APK to a specific versioned name
+        # We look specifically in the prod/release folder
+        APK_PATH=$(find app/build/outputs/apk/prod/release/ -name "*.apk" | head -n 1)
+        if [ -n "$APK_PATH" ]; then
+          mv "$APK_PATH" "app/build/outputs/apk/prod/release/CheeseJiggler_$TAG_NAME.apk"
+          echo "Renamed $APK_PATH to CheeseJiggler_$TAG_NAME.apk"
+        else
+          echo "No APK found in prod/release folder!"
+          exit 1
+        fi
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
