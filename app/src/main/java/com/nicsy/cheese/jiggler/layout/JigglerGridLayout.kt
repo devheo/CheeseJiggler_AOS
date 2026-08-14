@@ -24,14 +24,14 @@ class JigglerGridLayout @JvmOverloads constructor(
     }
 
     enum class TileType {
-        BASIC, GRID_COMPLEX, STRIPE_VERTICAL, STRIPE_DIAGONAL, DOT_PATTERN
+        BASIC, GRID_COMPLEX, STRIPE_HORIZONTAL, STRIPE_DIAGONAL, DOT_PATTERN, WIDE_STRIPES
     }
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
     }
 
-    private val squareSize = 100f // 바둑판 한 칸 크기 (px)
+    private var squareSize = 100f // 기본 셀 크기 (px)
     private var currentMode = JiggleMode.BASIC
     private var currentTileType = TileType.BASIC
     private var animator: ValueAnimator? = null
@@ -50,6 +50,17 @@ class JigglerGridLayout @JvmOverloads constructor(
     ) {
         currentMode = mode
         currentTileType = tileType
+
+        // 36dp를 픽셀로 변환
+        val dp36 = 36f * context.resources.displayMetrics.density
+        
+        // 패턴 종류에 따라 기본 셀 크기 조정
+        squareSize = when (tileType) {
+            TileType.STRIPE_HORIZONTAL -> dp36 // 각 줄이 36dp
+            TileType.WIDE_STRIPES -> dp36 * 2  // 더 굵은 패턴은 2배 (72dp)
+            else -> 100f // 기본 바둑판 등
+        }
+
         stopJiggle()
 
         // 0부터 1,000,000px 까지 끊김 없이 한 방향으로 계속 이동
@@ -178,13 +189,10 @@ class JigglerGridLayout @JvmOverloads constructor(
                     )
                 }
             }
-            TileType.STRIPE_VERTICAL -> {
-                // 수직 스트라이프 (더 잘게 쪼갬)
-                val stripeWidth = squareSize / 4f
-                for (i in 0 until 4) {
-                    paint.color = if ((col * 4 + i) % 2 == 0) Color.BLACK else Color.WHITE
-                    canvas.drawRect(x + i * stripeWidth, y, x + (i + 1) * stripeWidth, y + squareSize, paint)
-                }
+            TileType.STRIPE_HORIZONTAL -> {
+                // 가로 스트라이프: 현재 행(row)에 따라 검정/흰색 교차
+                paint.color = if (row % 2 == 0) Color.BLACK else Color.WHITE
+                canvas.drawRect(x, y, x + squareSize, y + squareSize, paint)
             }
             TileType.STRIPE_DIAGONAL -> {
                 // 대각선 스트라이프
@@ -208,6 +216,11 @@ class JigglerGridLayout @JvmOverloads constructor(
                         canvas.drawCircle(x + i * dotSpacing, y + j * dotSpacing, 12f, paint)
                     }
                 }
+            }
+            TileType.WIDE_STRIPES -> {
+                // 와이드 가로 스트라이프: 36dp * 2 두께로 흑백 교차
+                paint.color = if (row % 2 == 0) Color.BLACK else Color.WHITE
+                canvas.drawRect(x, y, x + squareSize, y + squareSize, paint)
             }
         }
     }

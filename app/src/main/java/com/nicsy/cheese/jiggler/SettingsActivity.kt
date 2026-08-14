@@ -20,7 +20,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.nicsy.cheese.jiggler.data.Bookmark
 import com.nicsy.cheese.jiggler.layout.AppPreferences
 import com.nicsy.cheese.jiggler.layout.JigglerGridLayout
-import kotlinx.coroutines.launch
 
 class SettingsActivity : ComponentActivity() {
 
@@ -41,6 +40,7 @@ class SettingsActivity : ComponentActivity() {
     private lateinit var rbTypeDuration: RadioButton
     private lateinit var rbTypeTargetTime: RadioButton
     private lateinit var rbTypeTimeRange: RadioButton
+    private lateinit var rbTypeExcludeRange: RadioButton
 
     private lateinit var layoutDuration: LinearLayout
     private lateinit var etDurationMinutes: EditText
@@ -54,6 +54,7 @@ class SettingsActivity : ComponentActivity() {
     private lateinit var layoutTimeRange: LinearLayout
     private lateinit var timePickerStart: TimePicker
     private lateinit var timePickerEnd: TimePicker
+    private lateinit var btnManageExclude: Button
 
     private lateinit var rgTileType: RadioGroup
     private lateinit var rbTileBasic: RadioButton
@@ -61,6 +62,7 @@ class SettingsActivity : ComponentActivity() {
     private lateinit var rbTileVStripe: RadioButton
     private lateinit var rbTileDStripe: RadioButton
     private lateinit var rbTileDots: RadioButton
+    private lateinit var rbTileWideStripes: RadioButton
 
     private lateinit var rgMovePattern: RadioGroup
 
@@ -100,6 +102,7 @@ class SettingsActivity : ComponentActivity() {
         rbTypeDuration = findViewById(R.id.rbTypeDuration)
         rbTypeTargetTime = findViewById(R.id.rbTypeTargetTime)
         rbTypeTimeRange = findViewById(R.id.rbTypeTimeRange)
+        rbTypeExcludeRange = findViewById(R.id.rbTypeExcludeRange)
 
         layoutDuration = findViewById(R.id.layoutDuration)
         etDurationMinutes = findViewById(R.id.etDurationMinutes)
@@ -114,6 +117,7 @@ class SettingsActivity : ComponentActivity() {
         layoutTimeRange = findViewById(R.id.layoutTimeRange)
         timePickerStart = findViewById(R.id.timePickerStart)
         timePickerEnd = findViewById(R.id.timePickerEnd)
+        btnManageExclude = findViewById(R.id.btnManageExclude)
         timePickerStart.setIs24HourView(true)
         timePickerEnd.setIs24HourView(true)
 
@@ -123,8 +127,9 @@ class SettingsActivity : ComponentActivity() {
         rbTileVStripe = findViewById(R.id.rbTileVStripe)
         rbTileDStripe = findViewById(R.id.rbTileDStripe)
         rbTileDots = findViewById(R.id.rbTileDots)
+        rbTileWideStripes = findViewById(R.id.rbTileWideStripes)
 
-        val tileButtons = listOf(rbTileBasic, rbTileGrid, rbTileVStripe, rbTileDStripe, rbTileDots)
+        val tileButtons = listOf(rbTileBasic, rbTileGrid, rbTileVStripe, rbTileDStripe, rbTileDots, rbTileWideStripes)
         tileButtons.forEach { rb ->
             rb.setOnClickListener {
                 tileButtons.forEach { it.isChecked = it == rb }
@@ -157,10 +162,23 @@ class SettingsActivity : ComponentActivity() {
             layoutDuration.visibility = if (checkedId == R.id.rbTypeDuration) View.VISIBLE else View.GONE
             timePicker.visibility = if (checkedId == R.id.rbTypeTargetTime) View.VISIBLE else View.GONE
             layoutTimeRange.visibility = if (checkedId == R.id.rbTypeTimeRange) View.VISIBLE else View.GONE
+            btnManageExclude.visibility = if (checkedId == R.id.rbTypeExcludeRange) View.VISIBLE else View.GONE
+            
+            // Immediately persist selection so it's not lost when navigating away
+            prefs.timerType = when (checkedId) {
+                R.id.rbTypeDuration -> "DURATION"
+                R.id.rbTypeTargetTime -> "TARGET_TIME"
+                R.id.rbTypeTimeRange -> "TIME_RANGE"
+                R.id.rbTypeExcludeRange -> "EXCLUDE_RANGE"
+                else -> "INFINITE"
+            }
         }
 
         btnSave.setOnClickListener { saveSettings() }
         btnSavePreset.setOnClickListener { showSavePresetDialog() }
+        btnManageExclude.setOnClickListener {
+            startActivity(android.content.Intent(this, ExclusionSettingsActivity::class.java))
+        }
     }
 
     override fun onResume() {
@@ -190,13 +208,15 @@ class SettingsActivity : ComponentActivity() {
             R.id.rbTypeDuration -> "DURATION"
             R.id.rbTypeTargetTime -> "TARGET_TIME"
             R.id.rbTypeTimeRange -> "TIME_RANGE"
+            R.id.rbTypeExcludeRange -> "EXCLUDE_RANGE"
             else -> "INFINITE"
         }
         val tileType = when {
             rbTileGrid.isChecked -> JigglerGridLayout.TileType.GRID_COMPLEX
-            rbTileVStripe.isChecked -> JigglerGridLayout.TileType.STRIPE_VERTICAL
+            rbTileVStripe.isChecked -> JigglerGridLayout.TileType.STRIPE_HORIZONTAL
             rbTileDStripe.isChecked -> JigglerGridLayout.TileType.STRIPE_DIAGONAL
             rbTileDots.isChecked -> JigglerGridLayout.TileType.DOT_PATTERN
+            rbTileWideStripes.isChecked -> JigglerGridLayout.TileType.WIDE_STRIPES
             else -> JigglerGridLayout.TileType.BASIC
         }
         val movePattern = when (rgMovePattern.checkedRadioButtonId) {
@@ -240,16 +260,18 @@ class SettingsActivity : ComponentActivity() {
         tvBrightnessTitle.text = getString(R.string.settings_brightness_format, brightness)
 
         when (prefs.timerType) {
-            "DURATION" -> rbTypeDuration.isChecked = true
-            "TARGET_TIME" -> rbTypeTargetTime.isChecked = true
-            "TIME_RANGE" -> rbTypeTimeRange.isChecked = true
-            else -> rbTypeInfinite.isChecked = true
+            "DURATION" -> rgTimerType.check(R.id.rbTypeDuration)
+            "TARGET_TIME" -> rgTimerType.check(R.id.rbTypeTargetTime)
+            "TIME_RANGE" -> rgTimerType.check(R.id.rbTypeTimeRange)
+            "EXCLUDE_RANGE" -> rgTimerType.check(R.id.rbTypeExcludeRange)
+            else -> rgTimerType.check(R.id.rbTypeInfinite)
         }
         
-        // Timer layout visibility update (since we might change it via code)
+        // Timer layout visibility update
         layoutDuration.visibility = if (rbTypeDuration.isChecked) View.VISIBLE else View.GONE
         timePicker.visibility = if (rbTypeTargetTime.isChecked) View.VISIBLE else View.GONE
         layoutTimeRange.visibility = if (rbTypeTimeRange.isChecked) View.VISIBLE else View.GONE
+        btnManageExclude.visibility = if (rbTypeExcludeRange.isChecked) View.VISIBLE else View.GONE
 
         etDurationMinutes.setText(prefs.durationMinutes.toString())
         timePicker.hour = prefs.targetHour
@@ -263,13 +285,14 @@ class SettingsActivity : ComponentActivity() {
         timePickerEnd.hour = prefs.endHour
         timePickerEnd.minute = prefs.endMinute
 
-        // 타일 타입 로드 (라디오 버튼 수동 갱신)
+        // 타일 타입 로드
         val tileType = prefs.tileType
         rbTileBasic.isChecked = tileType == JigglerGridLayout.TileType.BASIC
         rbTileGrid.isChecked = tileType == JigglerGridLayout.TileType.GRID_COMPLEX
-        rbTileVStripe.isChecked = tileType == JigglerGridLayout.TileType.STRIPE_VERTICAL
+        rbTileVStripe.isChecked = tileType == JigglerGridLayout.TileType.STRIPE_HORIZONTAL
         rbTileDStripe.isChecked = tileType == JigglerGridLayout.TileType.STRIPE_DIAGONAL
         rbTileDots.isChecked = tileType == JigglerGridLayout.TileType.DOT_PATTERN
+        rbTileWideStripes.isChecked = tileType == JigglerGridLayout.TileType.WIDE_STRIPES
 
         // 움직임 패턴 로드
         val patternGroup = findViewById<RadioGroup>(R.id.rgMovePattern)
@@ -291,6 +314,7 @@ class SettingsActivity : ComponentActivity() {
             R.id.rbTypeDuration -> "DURATION"
             R.id.rbTypeTargetTime -> "TARGET_TIME"
             R.id.rbTypeTimeRange -> "TIME_RANGE"
+            R.id.rbTypeExcludeRange -> "EXCLUDE_RANGE"
             else -> "INFINITE"
         }
         prefs.timerType = timerType
@@ -310,9 +334,10 @@ class SettingsActivity : ComponentActivity() {
         // 타일 타입 저장
         val tileType = when {
             rbTileGrid.isChecked -> JigglerGridLayout.TileType.GRID_COMPLEX
-            rbTileVStripe.isChecked -> JigglerGridLayout.TileType.STRIPE_VERTICAL
+            rbTileVStripe.isChecked -> JigglerGridLayout.TileType.STRIPE_HORIZONTAL
             rbTileDStripe.isChecked -> JigglerGridLayout.TileType.STRIPE_DIAGONAL
             rbTileDots.isChecked -> JigglerGridLayout.TileType.DOT_PATTERN
+            rbTileWideStripes.isChecked -> JigglerGridLayout.TileType.WIDE_STRIPES
             else -> JigglerGridLayout.TileType.BASIC
         }
         prefs.tileType = tileType

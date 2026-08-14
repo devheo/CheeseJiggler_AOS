@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.nicsy.cheese.jiggler.data.Bookmark
+import com.nicsy.cheese.jiggler.data.ExclusionRange
 
 class AppPreferences(context: Context) {
 
@@ -29,6 +30,7 @@ class AppPreferences(context: Context) {
         private const val KEY_TILE_TYPE = "key_tile_type"
         private const val KEY_IS_FIRST_RUN = "key_is_first_run"
         private const val KEY_BOOKMARKS = "key_bookmarks"
+        private const val KEY_EXCLUSION_RANGES = "key_exclusion_ranges"
     }
 
     private val gson = Gson()
@@ -168,5 +170,32 @@ class AppPreferences(context: Context) {
         val list = getBookmarks().toMutableList()
         list.removeAll { it.id == id }
         saveBookmarks(list)
+    }
+
+    fun getExclusionRanges(): List<ExclusionRange> {
+        val json = prefs.getString(KEY_EXCLUSION_RANGES, null) ?: return emptyList()
+        val type = object : TypeToken<List<ExclusionRange>>() {}.type
+        return try {
+            gson.fromJson(json, type)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    fun saveExclusionRanges(ranges: List<ExclusionRange>) {
+        val json = gson.toJson(ranges)
+        prefs.edit().putString(KEY_EXCLUSION_RANGES, json).apply()
+    }
+
+    fun addExclusionRange(range: ExclusionRange) {
+        val list = getExclusionRanges().toMutableList()
+        list.add(range)
+        saveExclusionRanges(list)
+    }
+
+    fun removeExclusionRange(id: Long) {
+        val list = getExclusionRanges().toMutableList()
+        list.removeAll { it.id == id }
+        saveExclusionRanges(list)
     }
 }

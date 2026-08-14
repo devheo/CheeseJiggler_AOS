@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.nicsy.cheese.jiggler.R
+import com.nicsy.cheese.jiggler.data.ExclusionRange
 import com.nicsy.cheese.jiggler.layout.AppPreferences
 import com.nicsy.cheese.jiggler.layout.JigglerGridLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -168,6 +169,10 @@ class MainActivity : ComponentActivity() {
                 tvStatus.visibility = View.VISIBLE
                 runTimeRangeChecker()
             }
+            "EXCLUDE_RANGE" -> {
+                tvStatus.visibility = View.VISIBLE
+                runTimeRangeChecker()
+            }
             else -> { // INFINITE
                 tvStatus.visibility = View.GONE
                 startWork()
@@ -196,31 +201,65 @@ class MainActivity : ComponentActivity() {
         val now = Calendar.getInstance()
         val currentMinutes = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE)
 
-        val startMinutes = prefs.startHour * 60 + prefs.startMinute
-        val endMinutes = prefs.endHour * 60 + prefs.endMinute
+        if (prefs.timerType == "EXCLUDE_RANGE") {
+            val exclusionRanges = prefs.getExclusionRanges()
+            var activeExclusion: ExclusionRange? = null
+            
+            for (range in exclusionRanges) {
+                val start = range.startHour * 60 + range.startMinute
+                val end = range.endHour * 60 + range.endMinute
+                
+                val isExcluded = if (start <= end) {
+                    currentMinutes in start until end
+                } else {
+                    currentMinutes >= start || currentMinutes < end
+                }
+                
+                if (isExcluded) {
+                    activeExclusion = range
+                    break
+                }
+            }
 
-        val isInRange = if (startMinutes <= endMinutes) {
-            currentMinutes in startMinutes until endMinutes
-        } else {
-            // 자정을 넘기는 시간 설정인 경우 (예: 22:00 ~ 06:00)
-            currentMinutes >= startMinutes || currentMinutes < endMinutes
-        }
-
-        if (isInRange) {
-            tvStatus.text = getString(
-                R.string.status_running_range,
-                prefs.startHour, prefs.startMinute, prefs.endHour, prefs.endMinute
-            )
-            // 아직 작동 전이라면 시작
-            if (jigglerGridLayout.visibility != View.VISIBLE && stealthRunnable == null) {
-                startWork()
+            if (activeExclusion != null) {
+                tvStatus.text = getString(R.string.status_paused_exclude, 
+                    activeExclusion.startHour, activeExclusion.startMinute, 
+                    activeExclusion.endHour, activeExclusion.endMinute)
+                stopWork()
+            } else {
+                tvStatus.text = getString(R.string.status_running_exclude, exclusionRanges.size)
+                if (jigglerGridLayout.visibility != View.VISIBLE && stealthRunnable == null) {
+                    startWork()
+                }
             }
         } else {
-            tvStatus.text = getString(
-                R.string.status_waiting_range,
-                prefs.startHour, prefs.startMinute
-            )
-            stopWork()
+            // Existing TIME_RANGE logic
+            val startMinutes = prefs.startHour * 60 + prefs.startMinute
+            val endMinutes = prefs.endHour * 60 + prefs.endMinute
+
+            val isInRange = if (startMinutes <= endMinutes) {
+                currentMinutes in startMinutes until endMinutes
+            } else {
+                // 자정을 넘기는 시간 설정인 경우 (예: 22:00 ~ 06:00)
+                currentMinutes >= startMinutes || currentMinutes < endMinutes
+            }
+
+            if (isInRange) {
+                tvStatus.text = getString(
+                    R.string.status_running_range,
+                    prefs.startHour, prefs.startMinute, prefs.endHour, prefs.endMinute
+                )
+                // 아직 작동 전이라면 시작
+                if (jigglerGridLayout.visibility != View.VISIBLE && stealthRunnable == null) {
+                    startWork()
+                }
+            } else {
+                tvStatus.text = getString(
+                    R.string.status_waiting_range,
+                    prefs.startHour, prefs.startMinute
+                )
+                stopWork()
+            }
         }
 
         rangeRunnable = Runnable { runTimeRangeChecker() }

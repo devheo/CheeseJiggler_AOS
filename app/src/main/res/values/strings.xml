@@ -32,10 +32,12 @@
     <string name="settings_timer_duration">1. 입력한 시간 동안 작동 (기본 30분)</string>
     <string name="settings_timer_target">2. 지정한 시각에 종료 (예: 18:00)</string>
     <string name="settings_timer_range">3. 지정한 시간 사이에만 작동</string>
+    <string name="settings_timer_exclude">4. 지정한 시간 제외하고 작동</string>
 
     <string name="settings_duration_label">작동 시간(분): </string>
     <string name="settings_start_time_label">시작 시간 선택:</string>
     <string name="settings_end_time_label">종료 시간 선택:</string>
+    <string name="settings_manage_exclude">제외 시간 관리하기</string>
 
     <string name="settings_stealth_label">스텔스 작동 시간 설정</string>
     <string name="settings_stealth_active_label">플레이 타임(초):</string>
@@ -44,9 +46,10 @@
     <string name="settings_tile_label">타일 패턴 설정</string>
     <string name="settings_tile_basic">기본 바둑판 (흑/백)</string>
     <string name="settings_tile_grid">복합 격자</string>
-    <string name="settings_tile_v_stripe">수직 스트라이프</string>
+    <string name="settings_tile_v_stripe">가로 스트라이프 (굵게)</string>
     <string name="settings_tile_d_stripe">대각선 스트라이프</string>
     <string name="settings_tile_dots">고밀도 점 패턴</string>
+    <string name="settings_tile_wide_stripes">와이드 스트라이프 (강력 추천)</string>
 
     <string name="settings_move_pattern_label">움직임 패턴</string>
     <string name="settings_move_basic">직선 하강 (기본)</string>
@@ -65,6 +68,15 @@
     <string name="bookmark_empty">저장된 프리셋이 없습니다.</string>
     <string name="bookmark_applied">프리셋이 적용되었습니다!</string>
     <string name="bookmark_add_title">현재 설정 저장</string>
+
+    <!-- Exclusion Ranges -->
+    <string name="exclude_title">제외 시간 관리</string>
+    <string name="exclude_add_title">제외 시간 추가</string>
+    <string name="exclude_empty">등록된 제외 시간이 없습니다.</string>
+    <string name="exclude_format">%1$02d:%2$02d ~ %3$02d:%4$02d</string>
+    <string name="exclude_delete_confirm">이 시간대를 삭제할까요?</string>
+    <string name="status_paused_exclude">작동 제외 시간입니다 (%1$02d:%2$02d ~ %3$02d:%4$02d)</string>
+    <string name="status_running_exclude">제외 시간 외 작동 중 (제외 시간: %1$d개 등록됨)</string>
 
     <!-- Welcome Activity -->
     <string name="welcome_title">치즈지글러에 오신 것을 환영합니다! 🧀</string>

@@ -32,10 +32,12 @@
     <string name="settings_timer_duration">1. Run for set duration (Default 30m)</string>
     <string name="settings_timer_target">2. Exit at target time (e.g., 18:00)</string>
     <string name="settings_timer_range">3. Run within time range</string>
+    <string name="settings_timer_exclude">4. Run EXCEPT during specified times</string>
 
     <string name="settings_duration_label">Duration (min): </string>
     <string name="settings_start_time_label">Select Start Time:</string>
     <string name="settings_end_time_label">Select End Time:</string>
+    <string name="settings_manage_exclude">Manage Exclusion Ranges</string>
 
     <string name="settings_stealth_label">Stealth Mode Settings</string>
     <string name="settings_stealth_active_label">Play Time (sec):</string>
@@ -44,9 +46,10 @@
     <string name="settings_tile_label">Tile Pattern Settings</string>
     <string name="settings_tile_basic">Basic Checkerboard</string>
     <string name="settings_tile_grid">Complex Grid</string>
-    <string name="settings_tile_v_stripe">Vertical Stripe</string>
+    <string name="settings_tile_v_stripe">Thick Horizontal Stripes</string>
     <string name="settings_tile_d_stripe">Diagonal Stripe</string>
     <string name="settings_tile_dots">High Density Dots</string>
+    <string name="settings_tile_wide_stripes">Wide Vertical Stripes (Recommended)</string>
 
     <string name="settings_move_pattern_label">Movement Pattern</string>
     <string name="settings_move_basic">Straight Down (Default)</string>
@@ -65,6 +68,15 @@
     <string name="bookmark_empty">No presets saved.</string>
     <string name="bookmark_applied">Preset applied!</string>
     <string name="bookmark_add_title">Save current settings</string>
+
+    <!-- Exclusion Ranges -->
+    <string name="exclude_title">Exclusion Ranges</string>
+    <string name="exclude_add_title">Add Exclusion Range</string>
+    <string name="exclude_empty">No exclusion ranges added.</string>
+    <string name="exclude_format">%1$02d:%2$02d ~ %3$02d:%4$02d</string>
+    <string name="exclude_delete_confirm">Delete this range?</string>
+    <string name="status_paused_exclude">Paused during exclusion (%1$02d:%2$02d ~ %3$02d:%4$02d)</string>
+    <string name="status_running_exclude">Running (Outside exclusion periods: %1$d total)</string>
 
     <!-- Welcome Activity -->
     <string name="welcome_title">Welcome to CheeseJiggler! 🧀</string>

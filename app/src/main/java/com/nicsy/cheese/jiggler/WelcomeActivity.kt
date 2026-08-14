@@ -27,15 +27,16 @@ class WelcomeActivity : AppCompatActivity() {
     private lateinit var layoutIndicators: LinearLayout
 
     data class WelcomeStep(
-        val emoji: String,
+        val emoji: String? = null,
+        val imageRes: Int? = null,
         val titleRes: Int,
         val descRes: Int
     )
 
     private val steps = listOf(
-        WelcomeStep("🧀", R.string.welcome_step1_title, R.string.welcome_step1_desc),
-        WelcomeStep("🖱️", R.string.welcome_step2_title, R.string.welcome_step2_desc),
-        WelcomeStep("🔴", R.string.welcome_step3_title, R.string.welcome_step3_desc)
+        WelcomeStep(emoji = "🧀", titleRes = R.string.welcome_step1_title, descRes = R.string.welcome_step1_desc),
+        WelcomeStep(emoji = "🖱️", titleRes = R.string.welcome_step2_title, descRes = R.string.welcome_step2_desc),
+        WelcomeStep(imageRes = R.drawable.ic_optical_mouse, titleRes = R.string.welcome_step3_title, descRes = R.string.welcome_step3_desc)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,39 +91,40 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun setupIndicators() {
-        val indicators = arrayOfNulls<ImageView>(steps.size)
-        val layoutParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        layoutParams.setMargins(8, 0, 8, 0)
-
-        for (i in indicators.indices) {
-            indicators[i] = ImageView(applicationContext)
-            indicators[i]?.setImageDrawable(ContextCompat.getDrawable(applicationContext, android.R.drawable.presence_invisible)) // Dummy
-            indicators[i]?.layoutParams = layoutParams
-            layoutIndicators.addView(indicators[i])
+        layoutIndicators.removeAllViews()
+        repeat(steps.size) {
+            val imageView = ImageView(this)
+            val lp = LinearLayout.LayoutParams(
+                (8 * resources.displayMetrics.density).toInt(),
+                (8 * resources.displayMetrics.density).toInt()
+            )
+            lp.setMargins(
+                (4 * resources.displayMetrics.density).toInt(), 0,
+                (4 * resources.displayMetrics.density).toInt(), 0
+            )
+            imageView.layoutParams = lp
+            imageView.setImageResource(R.drawable.ic_indicator_dot)
+            layoutIndicators.addView(imageView)
         }
         updateIndicators(0)
     }
 
     private fun updateIndicators(position: Int) {
-        val childCount = layoutIndicators.childCount
-        for (i in 0 until childCount) {
+        for (i in 0 until layoutIndicators.childCount) {
             val imageView = layoutIndicators.getChildAt(i) as ImageView
-            if (i == position) {
-                // 테마의 primary 색상 사용
-                imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.cheese_primary))
-            } else {
-                // 비활성 상태는 secondary 또는 연한 회색
-                imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.cheese_secondary))
-            }
-            // Dot size
-            val size = if (i == position) 12 else 8
-            val px = (size * resources.displayMetrics.density).toInt()
-            val params = imageView.layoutParams as LinearLayout.LayoutParams
-            params.width = px
-            params.height = px
-            imageView.layoutParams = params
+            val isSelected = i == position
+            
+            // Tint color
+            val color = if (isSelected) R.color.cheese_primary else R.color.cheese_secondary
+            imageView.setColorFilter(ContextCompat.getColor(this, color))
+
+            // Size / Shape (Modern Pill effect)
+            val width = if (isSelected) 24 else 8
+            val height = 8
+            val lp = imageView.layoutParams as LinearLayout.LayoutParams
+            lp.width = (width * resources.displayMetrics.density).toInt()
+            lp.height = (height * resources.displayMetrics.density).toInt()
+            imageView.layoutParams = lp
         }
     }
 
@@ -137,6 +139,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         inner class WelcomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val tvEmoji: TextView = view.findViewById(R.id.tvStepEmoji)
+            val ivImage: ImageView = view.findViewById(R.id.ivStepImage)
             val tvTitle: TextView = view.findViewById(R.id.tvStepTitle)
             val tvDesc: TextView = view.findViewById(R.id.tvStepDesc)
         }
@@ -149,7 +152,17 @@ class WelcomeActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: WelcomeViewHolder, position: Int) {
             val step = steps[position]
-            holder.tvEmoji.text = step.emoji
+            
+            if (step.imageRes != null) {
+                holder.ivImage.visibility = View.VISIBLE
+                holder.tvEmoji.visibility = View.GONE
+                holder.ivImage.setImageResource(step.imageRes)
+            } else {
+                holder.ivImage.visibility = View.GONE
+                holder.tvEmoji.visibility = View.VISIBLE
+                holder.tvEmoji.text = step.emoji
+            }
+            
             holder.tvTitle.setText(step.titleRes)
             holder.tvDesc.setText(step.descRes)
         }

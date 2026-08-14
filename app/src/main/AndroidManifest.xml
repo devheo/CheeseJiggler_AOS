@@ -40,6 +40,12 @@
             android:screenOrientation="portrait"
             android:exported="false"
             android:label="@string/bookmarks_title" />
+
+        <activity
+            android:name="com.nicsy.cheese.jiggler.ExclusionSettingsActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:label="@string/exclude_title" />
     </application>
 
 </manifest>

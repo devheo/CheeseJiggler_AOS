@@ -72,7 +72,13 @@ class BookmarkActivity : ComponentActivity() {
         prefs.endHour = bookmark.endHour
         prefs.endMinute = bookmark.endMinute
         prefs.jiggleMode = try { JigglerGridLayout.JiggleMode.valueOf(bookmark.jiggleMode) } catch(e: Exception) { JigglerGridLayout.JiggleMode.BASIC }
-        prefs.tileType = try { JigglerGridLayout.TileType.valueOf(bookmark.tileType) } catch(e: Exception) { JigglerGridLayout.TileType.BASIC }
+        prefs.tileType = try {
+            // Handle migration from STRIPE_VERTICAL to STRIPE_HORIZONTAL
+            val type = if (bookmark.tileType == "STRIPE_VERTICAL") "STRIPE_HORIZONTAL" else bookmark.tileType
+            JigglerGridLayout.TileType.valueOf(type)
+        } catch(e: Exception) {
+            JigglerGridLayout.TileType.BASIC
+        }
         prefs.isStealthEnabled = bookmark.isStealthEnabled
         prefs.stealthActiveSec = bookmark.stealthActiveSec
         prefs.stealthRestSec = bookmark.stealthRestSec
