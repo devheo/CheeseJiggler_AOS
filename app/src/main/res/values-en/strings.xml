@@ -13,7 +13,7 @@
 
     <!-- Status Messages -->
     <string name="status_running_range">Running (%1$02d:%2$02d ~ %3$02d:%4$02d)</string>
-    <string name="status_waiting_range">Waiting (Start: %1$02d:%2$02d)</string>
+    <string name="status_waiting_range">Waiting (%1$02d:%2$02d ~ %3$02d:%4$02d)</string>
     <string name="status_stealth_active">Stealth Active (%1$ds)</string>
     <string name="status_stealth_rest">Stealth Resting (%1$ds)</string>
     <string name="status_remaining_time">Time left: %1$02d:%2$02d</string>
@@ -123,4 +123,6 @@
     <string name="controller_btn_stop">Stop Jiggler</string>
     <string name="controller_btn_disconnect">Disconnect</string>
     <string name="controller_error_code">Invalid code or device not found.</string>
+    <string name="overlay_permission_needed">"Display over other apps" permission is required to force bring the app to foreground via remote control.</string>
+    <string name="settings">Settings</string>
 </resources>

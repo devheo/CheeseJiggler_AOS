@@ -32,6 +32,7 @@ class AppPreferences(context: Context) {
         private const val KEY_BOOKMARKS = "key_bookmarks"
         private const val KEY_EXCLUSION_RANGES = "key_exclusion_ranges"
         private const val KEY_REMOTE_UID = "key_remote_uid"
+        private const val KEY_IS_SERVICE_RUNNING = "key_is_service_running"
     }
 
     private val gson = Gson()
@@ -204,5 +205,11 @@ class AppPreferences(context: Context) {
         get() = prefs.getString(KEY_REMOTE_UID, null)
         set(value) {
             prefs.edit().putString(KEY_REMOTE_UID, value).apply()
+        }
+
+    var isServiceRunning: Boolean
+        get() = prefs.getBoolean(KEY_IS_SERVICE_RUNNING, false)
+        set(value) {
+            prefs.edit().putBoolean(KEY_IS_SERVICE_RUNNING, value).apply()
         }
 }

@@ -13,7 +13,7 @@
 
     <!-- Status Messages -->
     <string name="status_running_range">작동 중 (%1$02d:%2$02d ~ %3$02d:%4$02d 범위 내)</string>
-    <string name="status_waiting_range">작동 대기 중 (시작 시각: %1$02d:%2$02d)</string>
+    <string name="status_waiting_range">작동 대기 중 (%1$02d:%2$02d ~ %3$02d:%4$02d)</string>
     <string name="status_stealth_active">스텔스 작동 중 (%1$d초)</string>
     <string name="status_stealth_rest">스텔스 휴식 중 (%1$d초)</string>
     <string name="status_remaining_time">남은 시간: %1$02d:%2$02d</string>
@@ -139,4 +139,6 @@
     <string name="remote_guide_btn_help">도움말 보기</string>
     <string name="remote_guide_close">닫기</string>
     <string name="remote_shortcut_desc">원격 조정기로 바로가기</string>
+    <string name="overlay_permission_needed">원격 제어로 앱을 강제로 띄우려면 "다른 앱 위에 표시" 권한이 필요합니다.</string>
+    <string name="settings">설정</string>
 </resources>

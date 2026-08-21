@@ -12,6 +12,8 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
+import android.net.Uri
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -42,6 +44,7 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var mainRootLayout: View
     private lateinit var jigglerGridLayout: JigglerGridLayout
+    private lateinit var layoutTopButtons: View
     private lateinit var btnSettings: ImageButton
     private lateinit var btnRemoteShortcut: ImageButton
     private lateinit var fabPlay: FloatingActionButton
@@ -109,6 +112,7 @@ class MainActivity : ComponentActivity() {
 
         mainRootLayout = findViewById(R.id.mainRootLayout)
         jigglerGridLayout = findViewById(R.id.jigglerGridLayout)
+        layoutTopButtons = findViewById(R.id.layoutTopButtons)
         btnSettings = findViewById(R.id.btnSettings)
         btnRemoteShortcut = findViewById(R.id.btnRemoteShortcut)
         fabPlay = findViewById(R.id.fabPlay)
@@ -135,24 +139,8 @@ class MainActivity : ComponentActivity() {
         fabPlay.setOnClickListener {
             if (isRunning) {
                 stopJiggler(getString(R.string.stop_by_user))
-                // 서서히 나타남 (Fade In)
-                btnSettings.visibility = View.VISIBLE
-                layoutMainStealth.visibility = View.VISIBLE
-                btnSettings.alpha = 0f
-                layoutMainStealth.alpha = 0f
-                btnSettings.animate().alpha(1f).setDuration(300)
-                layoutMainStealth.animate().alpha(1f).setDuration(300)
             } else {
                 startJiggler()
-                // 서서히 사라짐 (Fade Out)
-                btnSettings.animate()
-                    .alpha(0f)
-                    .setDuration(300)
-                    .withEndAction { btnSettings.visibility = View.GONE }
-                layoutMainStealth.animate()
-                    .alpha(0f)
-                    .setDuration(300)
-                    .withEndAction { layoutMainStealth.visibility = View.GONE }
             }
         }
 
@@ -184,12 +172,18 @@ class MainActivity : ComponentActivity() {
         onBackPressedDispatcher.addCallback(this, callback)
 
         askNotificationPermission()
+        checkOverlayPermission()
 
-        startForegroundService()
+        startJigglerService()
 
         // Initialize remote control
         lifecycleScope.launch {
             remoteManager.initializeDevice { }
+            
+            // Sync initial state with service
+            if (prefs.isServiceRunning && !isRunning) {
+                startJiggler()
+            }
         }
         
         val filter = IntentFilter(JigglerService.ACTION_STATE_CHANGED)
@@ -209,9 +203,31 @@ class MainActivity : ComponentActivity() {
 
     private fun handleIntent(intent: Intent?) {
         if (intent?.action == JigglerService.ACTION_REMOTE_START) {
+            // Reorder to front to ensure it's visible even if it was in the background
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             if (!isRunning) {
                 startJiggler()
             }
+        }
+    }
+
+    private fun checkOverlayPermission() {
+        if (!Settings.canDrawOverlays(this)) {
+            val snackbar = Snackbar.make(
+                mainRootLayout,
+                getString(R.string.overlay_permission_needed),
+                Snackbar.LENGTH_INDEFINITE
+            )
+            snackbar.setAction(getString(R.string.settings)) {
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+                startActivity(intent)
+            }
+            snackbar.setBackgroundTint(ContextCompat.getColor(this, R.color.cheese_primary))
+            snackbar.setTextColor(ContextCompat.getColor(this, R.color.white))
+            snackbar.show()
         }
     }
 
@@ -244,11 +260,14 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun startJiggler() {
+        Log.d("MainActivity", "startJiggler starting...")
         isRunning = true
         updateRemoteStatus()
         fabPlay.setImageResource(R.drawable.ico_app_stop)
 
-        startForegroundService()
+        hideUI()
+
+        startJigglerService()
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         // 화면 밝기 고정 (0.0 ~ 1.0)
@@ -309,6 +328,46 @@ class MainActivity : ComponentActivity() {
         rangeRunnable?.let { rangeHandler.removeCallbacks(it) }
         rangeRunnable = null
         stopAnimation()
+        restoreUI()
+    }
+
+    private fun hideUI() {
+        Log.d("MainActivity", "hideUI called. isRunning=$isRunning")
+        layoutTopButtons.animate().cancel()
+        layoutMainStealth.animate().cancel()
+        
+        layoutTopButtons.alpha = 1f
+        layoutMainStealth.alpha = 1f
+        
+        layoutTopButtons.animate()
+            .alpha(0f)
+            .setDuration(400)
+            .withEndAction { 
+                if (isRunning) {
+                    layoutTopButtons.visibility = View.GONE 
+                }
+            }
+            
+        layoutMainStealth.animate()
+            .alpha(0f)
+            .setDuration(400)
+            .withEndAction { 
+                if (isRunning) {
+                    layoutMainStealth.visibility = View.GONE 
+                }
+            }
+    }
+
+    private fun restoreUI() {
+        Log.d("MainActivity", "restoreUI called. isRunning=$isRunning")
+        layoutTopButtons.animate().cancel()
+        layoutMainStealth.animate().cancel()
+        
+        layoutTopButtons.visibility = View.VISIBLE
+        layoutMainStealth.visibility = View.VISIBLE
+        
+        layoutTopButtons.animate().alpha(1f).setDuration(400).start()
+        layoutMainStealth.animate().alpha(1f).setDuration(400).start()
     }
 
     private fun formatTime(hour: Int, minute: Int): String {
@@ -383,7 +442,7 @@ class MainActivity : ComponentActivity() {
             } else {
                 tvStatus.text = getString(
                     R.string.status_waiting_range,
-                    prefs.startHour, prefs.startMinute
+                    prefs.startHour, prefs.startMinute, prefs.endHour, prefs.endMinute
                 )
                 stopWork()
             }
@@ -460,13 +519,15 @@ class MainActivity : ComponentActivity() {
         updateRemoteStatus()
         fabPlay.setImageResource(R.drawable.ico_app_play)
         
+        restoreUI()
+
         // Ensure all handlers are cleared immediately
         stealthHandler.removeCallbacksAndMessages(null)
         rangeHandler.removeCallbacksAndMessages(null)
         stealthRunnable = null
         rangeRunnable = null
 
-        stopForegroundService()
+        stopJigglerService()
         // 화면 켜짐 유지 해제 (정지할 때만 풀림)
         window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
@@ -486,20 +547,16 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun stopForegroundService() {
+    private fun stopJigglerService() {
         val serviceIntent = Intent(this, JigglerService::class.java).apply {
             action = JigglerService.ACTION_STOP
         }
         startService(serviceIntent)
     }
 
-    private fun startForegroundService() {
+    private fun startJigglerService() {
         val serviceIntent = Intent(this, JigglerService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(serviceIntent)
-        } else {
-            startService(serviceIntent)
-        }
+        startService(serviceIntent)
     }
 
     private fun askNotificationPermission() {

@@ -48,6 +48,13 @@ class JigglerService : Service() {
     private fun startRemoteListener() {
         serviceScope.launch {
             remoteManager.initializeDevice { }
+            
+            // Restore state from preferences if service was killed
+            if (prefs.isServiceRunning && !isJiggling) {
+                Log.d("JigglerService", "Restoring jiggling state from preferences")
+                startJiggling()
+            }
+
             remoteManager.startListening(object : FirebaseRemoteManager.RemoteCommandCallback {
                 override fun onCommandReceived(command: String) {
                     Log.d("JigglerService", "Remote command received: $command")
@@ -63,15 +70,20 @@ class JigglerService : Service() {
 
     private fun startJiggling() {
         isJiggling = true
+        prefs.isServiceRunning = true
         updateStatus()
         
-        // Use high-priority notification with Full Screen Intent to bring app to foreground
-        updateNotification("Active - Jiggling...", isFullScreen = true)
+        // Promote to foreground when jiggling starts
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            startForeground(NOTIFICATION_ID, createNotification("Active - Jiggling...", true), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+        } else {
+            startForeground(NOTIFICATION_ID, createNotification("Active - Jiggling...", true))
+        }
         
         // Launch MainActivity to show the animation and keep screen on
         val activityIntent = Intent(this, MainActivity::class.java).apply {
             action = ACTION_REMOTE_START
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
         }
         
         startActivity(activityIntent)
@@ -87,9 +99,12 @@ class JigglerService : Service() {
     private fun stopJiggling() {
         Log.d("JigglerService", "stopJiggling() called")
         isJiggling = false
+        prefs.isServiceRunning = false
         releaseWakeLock()
         updateStatus()
-        updateNotification("Idle - Waiting for command")
+        
+        // Remove foreground notification when idle
+        stopForeground(STOP_FOREGROUND_REMOVE)
 
         Log.d("JigglerService", "Sending STOP broadcast")
         sendBroadcast(Intent(ACTION_STATE_CHANGED).apply {
@@ -120,12 +135,12 @@ class JigglerService : Service() {
             return START_NOT_STICKY
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            startForeground(NOTIFICATION_ID, createNotification("Idle - Waiting for command", false), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
-        } else {
-            startForeground(NOTIFICATION_ID, createNotification("Idle - Waiting for command", false))
-        }
         acquireWakeLock()
+        
+        // If we are already jiggling (e.g. service restarted), ensure foreground notification is shown
+        if (isJiggling || (intent?.action == ACTION_REMOTE_START)) {
+            startJiggling()
+        }
         
         return START_STICKY
     }
@@ -184,12 +199,11 @@ class JigglerService : Service() {
         if (wakeLock?.isHeld == true) return
 
         val powerManager = getSystemService(POWER_SERVICE) as PowerManager
-        @Suppress("DEPRECATION")
         wakeLock = powerManager.newWakeLock(
-            PowerManager.SCREEN_BRIGHT_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.ON_AFTER_RELEASE,
+            PowerManager.PARTIAL_WAKE_LOCK,
             "CheeseJiggler::WakeLock"
         ).apply {
-            acquire(10 * 60 * 1000L /*10 minutes*/)
+            acquire()
         }
     }
 

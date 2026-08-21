@@ -23,6 +23,25 @@
           "other_platform_oauth_client": []
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655342338458:android:1cffb4f9fa83b16a9a7a23",
+        "android_client_info": {
+          "package_name": "com.nicsy.cheese.jiggler.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANxqE0eTIHWKv1QYN0rHKvzQe-DY-7qls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"

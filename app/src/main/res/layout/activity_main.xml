@@ -15,6 +15,7 @@
 
     <!-- 우측 상단 버튼들 -->
     <LinearLayout
+        android:id="@+id/layoutTopButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
