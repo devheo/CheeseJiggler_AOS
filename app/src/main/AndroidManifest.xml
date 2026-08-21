@@ -2,6 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <queries>
+        <package android:name="com.google.android.gms" />
+        <package android:name="com.android.vending" />
+    </queries>
+
     <application
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -10,8 +25,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CheeseJiggler">
+
         <activity
-            android:name="com.nicsy.cheese.jiggler.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.CheeseJiggler.Welcome"
@@ -23,29 +39,66 @@
         </activity>
 
         <activity
-            android:name="com.nicsy.cheese.jiggler.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
         <!-- 설정 액티비티 추가 -->
         <activity
-            android:name="com.nicsy.cheese.jiggler.SettingsActivity"
+            android:name=".SettingsActivity"
             android:screenOrientation="portrait"
             android:exported="false"
             android:label="@string/settings_title" />
 
         <activity
-            android:name="com.nicsy.cheese.jiggler.BookmarkActivity"
+            android:name=".BookmarkActivity"
             android:screenOrientation="portrait"
             android:exported="false"
             android:label="@string/bookmarks_title" />
 
         <activity
-            android:name="com.nicsy.cheese.jiggler.ExclusionSettingsActivity"
+            android:name=".ExclusionSettingsActivity"
             android:screenOrientation="portrait"
             android:exported="false"
             android:label="@string/exclude_title" />
+
+        <activity
+            android:name=".RemoteControlActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:label="@string/remote_title" />
+
+        <activity
+            android:name=".RemoteControllerActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:label="@string/controller_title" />
+
+        <activity
+            android:name=".RemoteGuideActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:label="@string/remote_guide_title" />
+
+        <service
+            android:name="com.nicsy.cheese.jiggler.service.JigglerService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Automation and device state management" />
+        </service>
+
+        <receiver
+            android:name="com.nicsy.cheese.jiggler.service.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

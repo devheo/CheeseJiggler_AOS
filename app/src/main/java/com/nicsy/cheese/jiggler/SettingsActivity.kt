@@ -55,6 +55,7 @@ class SettingsActivity : ComponentActivity() {
     private lateinit var timePickerStart: TimePicker
     private lateinit var timePickerEnd: TimePicker
     private lateinit var btnManageExclude: Button
+    private lateinit var layoutRemoteControl: View
 
     private lateinit var rgTileType: RadioGroup
     private lateinit var rbTileBasic: RadioButton
@@ -118,6 +119,7 @@ class SettingsActivity : ComponentActivity() {
         timePickerStart = findViewById(R.id.timePickerStart)
         timePickerEnd = findViewById(R.id.timePickerEnd)
         btnManageExclude = findViewById(R.id.btnManageExclude)
+        layoutRemoteControl = findViewById(R.id.layoutRemoteControl)
         timePickerStart.setIs24HourView(true)
         timePickerEnd.setIs24HourView(true)
 
@@ -178,6 +180,9 @@ class SettingsActivity : ComponentActivity() {
         btnSavePreset.setOnClickListener { showSavePresetDialog() }
         btnManageExclude.setOnClickListener {
             startActivity(android.content.Intent(this, ExclusionSettingsActivity::class.java))
+        }
+        layoutRemoteControl.setOnClickListener {
+            startActivity(android.content.Intent(this, RemoteControlActivity::class.java))
         }
     }
 

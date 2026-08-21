@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "655342338458",
+    "project_id": "cheese-jiggler",
+    "storage_bucket": "cheese-jiggler.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655342338458:android:b46341233032c7e99a7a23",
+        "android_client_info": {
+          "package_name": "com.nicsy.cheese.jiggler"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANxqE0eTIHWKv1QYN0rHKvzQe-DY-7qls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,6 +7,7 @@
     <string name="main_settings_desc">Settings</string>
     <string name="main_play_desc">Start/Stop</string>
     <string name="stop_by_user">Stopped by user.</string>
+    <string name="stop_by_remote">Stopped by remote command.</string>
     <string name="exit_double_tap">Press back again to exit.</string>
     <string name="stop_timer_finished">Set time has been completed.</string>
 
@@ -28,15 +29,15 @@
     <string name="settings_brightness_format">Screen Brightness: %d%%</string>
 
     <string name="settings_timer_options_label">Operation &amp; Exit Options</string>
-    <string name="settings_timer_infinite">Run until manual stop (Default)</string>
-    <string name="settings_timer_duration">1. Run for set duration (Default 30m)</string>
-    <string name="settings_timer_target">2. Exit at target time (e.g., 18:00)</string>
-    <string name="settings_timer_range">3. Run within time range</string>
-    <string name="settings_timer_exclude">4. Run EXCEPT during specified times</string>
+    <string name="settings_timer_infinite">Continuous (Default)</string>
+    <string name="settings_timer_duration">Timer mode (Default 30m)</string>
+    <string name="settings_timer_target">Set end time (e.g., 18:00)</string>
+    <string name="settings_timer_range">Active during set hours</string>
+    <string name="settings_timer_exclude">Inactive during set hours</string>
 
     <string name="settings_duration_label">Duration (min): </string>
-    <string name="settings_start_time_label">Select Start Time:</string>
-    <string name="settings_end_time_label">Select End Time:</string>
+    <string name="settings_start_time_label">Select Start Time (Exclude Start)</string>
+    <string name="settings_end_time_label">Select End Time (Exclude End)</string>
     <string name="settings_manage_exclude">Manage Exclusion Ranges</string>
 
     <string name="settings_stealth_label">Stealth Mode Settings</string>
@@ -69,13 +70,28 @@
     <string name="bookmark_applied">Preset applied!</string>
     <string name="bookmark_add_title">Save current settings</string>
 
+    <!-- Remote Control -->
+    <string name="remote_title">Remote Control Settings</string>
+    <string name="remote_friend_code_label">My Friend Code (6 digits)</string>
+    <string name="remote_status_connected">Remote Connection Active</string>
+    <string name="remote_status_waiting">Waiting for commands…</string>
+    <string name="remote_last_command">Last Remote Command: %s</string>
+    <string name="remote_last_command_none">Last Remote Command: None</string>
+    <string name="remote_reset_code">Regenerate Code</string>
+    <string name="remote_copy_code">Copy Code</string>
+    <string name="remote_open_controller">Open Remote Controller</string>
+    <string name="remote_copied">Code copied to clipboard.</string>
+    <string name="remote_desc">Enter this code on the controller app\nto start/stop this device remotely.</string>
+    <string name="remote_init_loading">Loading friend code…</string>
+
     <!-- Exclusion Ranges -->
     <string name="exclude_title">Exclusion Ranges</string>
     <string name="exclude_add_title">Add Exclusion Range</string>
     <string name="exclude_empty">No exclusion ranges added.</string>
     <string name="exclude_format">%1$02d:%2$02d ~ %3$02d:%4$02d</string>
+    <string name="exclude_format_ampm">%1$s ~ %2$s</string>
     <string name="exclude_delete_confirm">Delete this range?</string>
-    <string name="status_paused_exclude">Paused during exclusion (%1$02d:%2$02d ~ %3$02d:%4$02d)</string>
+    <string name="status_paused_exclude">Paused for exclusion (%1$s ~ %2$s)</string>
     <string name="status_running_exclude">Running (Outside exclusion periods: %1$d total)</string>
 
     <!-- Welcome Activity -->
@@ -92,4 +108,19 @@
 
     <string name="welcome_step3_title">Optical Mouse Only 🔴</string>
     <string name="welcome_step3_desc">This app works only with optical sensor mice.\n(Ball or some laser mice may not be supported.)</string>
+
+    <!-- Remote Controller -->
+    <string name="controller_title">Remote Controller</string>
+    <string name="controller_connect_hint">Enter 6-digit friend code</string>
+    <string name="controller_btn_connect">Connect to Jiggler</string>
+    <string name="controller_status_online">Connected (Online)</string>
+    <string name="controller_status_offline">Offline</string>
+    <string name="controller_status_unknown">Unknown</string>
+    <string name="controller_last_seen">Last Active: %s</string>
+    <string name="controller_device_idle">Idle</string>
+    <string name="controller_device_running">Running</string>
+    <string name="controller_btn_start">Start Jiggler</string>
+    <string name="controller_btn_stop">Stop Jiggler</string>
+    <string name="controller_btn_disconnect">Disconnect</string>
+    <string name="controller_error_code">Invalid code or device not found.</string>
 </resources>

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicsy.cheese.jiggler.data.ExclusionRange
 import com.nicsy.cheese.jiggler.layout.AppPreferences
+import java.util.Locale
 
 class ExclusionSettingsActivity : ComponentActivity() {
 
@@ -63,10 +65,15 @@ class ExclusionSettingsActivity : ComponentActivity() {
         val currentH = now.get(java.util.Calendar.HOUR_OF_DAY)
         val currentM = now.get(java.util.Calendar.MINUTE)
 
-        // Pick Start Time (is24HourView = false for AM/PM)
+        // Pick Start Time
         TimePickerDialog(this, { _, startH, startM ->
             // Pick End Time
             TimePickerDialog(this, { _, endH, endM ->
+                if (startH == endH && startM == endM) {
+                    Toast.makeText(this, "시작과 종료 시간이 같습니다.", Toast.LENGTH_SHORT).show()
+                    return@TimePickerDialog
+                }
+                
                 val newRange = ExclusionRange(
                     id = System.currentTimeMillis(),
                     startHour = startH,
@@ -91,6 +98,16 @@ class ExclusionSettingsActivity : ComponentActivity() {
         refreshList()
     }
 
+    private fun formatTime(hour: Int, minute: Int): String {
+        val amPm = if (hour < 12) "오전" else "오후"
+        val displayHour = when {
+            hour == 0 -> 12
+            hour > 12 -> hour - 12
+            else -> hour
+        }
+        return String.format(Locale.KOREA, "%s %02d:%02d", amPm, displayHour, minute)
+    }
+
     inner class ExclusionAdapter(
         private val onDeleteClick: (ExclusionRange) -> Unit
     ) : RecyclerView.Adapter<ExclusionAdapter.ViewHolder>() {
@@ -109,7 +126,9 @@ class ExclusionSettingsActivity : ComponentActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = items[position]
-            holder.tvRange.text = getString(R.string.exclude_format, item.startHour, item.startMinute, item.endHour, item.endMinute)
+            val startStr = formatTime(item.startHour, item.startMinute)
+            val endStr = formatTime(item.endHour, item.endMinute)
+            holder.tvRange.text = getString(R.string.exclude_format_ampm, startStr, endStr)
             holder.btnDelete.setOnClickListener { onDeleteClick(item) }
         }
 

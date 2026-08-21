@@ -31,6 +31,7 @@ class AppPreferences(context: Context) {
         private const val KEY_IS_FIRST_RUN = "key_is_first_run"
         private const val KEY_BOOKMARKS = "key_bookmarks"
         private const val KEY_EXCLUSION_RANGES = "key_exclusion_ranges"
+        private const val KEY_REMOTE_UID = "key_remote_uid"
     }
 
     private val gson = Gson()
@@ -198,4 +199,10 @@ class AppPreferences(context: Context) {
         list.removeAll { it.id == id }
         saveExclusionRanges(list)
     }
+
+    var remoteUid: String?
+        get() = prefs.getString(KEY_REMOTE_UID, null)
+        set(value) {
+            prefs.edit().putString(KEY_REMOTE_UID, value).apply()
+        }
 }
